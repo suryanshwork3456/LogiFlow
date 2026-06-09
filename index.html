@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LogiFlow | Smart Logistics Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      * { font-family: 'Poppins', sans-serif; }
+      html { scroll-behavior: smooth; }
+      body { overflow-x: hidden; }
+      
+      .section-cut-bottom {
+        clip-path: polygon(0 0, 100% 0, 100% 94%, 0 100%);
+      }
+      .section-cut-top {
+        clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
+      }
+      .world-bg::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url('https://www.transparenttextures.com/patterns/world-map.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.055;
+        pointer-events: none;
+        z-index: 0;
+      }
+    </style>
+  </head>
+  <body class="bg-[#FFFFFF] text-[#555F6D]">
+    <div id="scroll-progress" style="position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: #FF5722; z-index: 9999; transition: width 0.1s ease-out;"></div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
