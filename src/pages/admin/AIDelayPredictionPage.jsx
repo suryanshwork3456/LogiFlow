@@ -1,8 +1,9 @@
 // filepath: src/pages/AIDelayPredictionPage.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar.jsx';
-import Footer from '../components/Footer.jsx';
+// Changing These bcoz now AdminLayout will handle the Navbar and Footer for all admin pages, so we don't need to import them here anymore.
+// import Navbar from '../components/Navbar.jsx';
+// import Footer from '../components/Footer.jsx';
 
 export default function AIDelayPredictionPage() {
   const variables = [
@@ -14,21 +15,10 @@ export default function AIDelayPredictionPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col pt-20 bg-[#F5F5F5]">
-      <Navbar />
-      
-      {/* Page Hero */}
-      <div className="bg-[#1A1A2E] py-16 px-6 md:px-10">
-        <div className="max-w-7xl mx-auto">
-          <Link to="/" className="text-[#FF5722] font-bold mb-6 inline-block hover:underline">← Back to Home</Link>
-          <div className="text-white/60 mb-2 font-medium tracking-wide">Home / AI Prediction</div>
-          <h1 className="text-white text-[40px] md:text-[56px] font-bold leading-tight mb-4">AI ETA & Delay Prediction</h1>
-          <p className="text-white/80 text-xl font-medium mb-6">82% accuracy. Updated every 90 seconds.</p>
-          <div className="w-12 h-1 bg-[#FF5722]"></div>
-        </div>
-      </div>
 
-      <main className="flex-grow max-w-7xl mx-auto px-6 md:px-10 py-10 md:py-16 w-full space-y-12">
+      
+
+      <div className="flex-grow max-w-7xl mx-auto px-6 md:px-10 py-10 md:py-16 w-full space-y-12">
         {/* SECTION A — Prediction Dashboard */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-[#FFFFFF] rounded-2xl shadow-sm p-6 border border-[#E0E0E0] flex flex-col items-center text-center relative overflow-hidden">
@@ -129,9 +119,6 @@ export default function AIDelayPredictionPage() {
             ))}
           </div>
         </section>
-      </main>
-
-      <Footer />
     </div>
   );
 }

@@ -1,26 +1,14 @@
 // filepath: src/pages/RouteOptimizationPage.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar.jsx';
-import Footer from '../components/Footer.jsx';
+// import Navbar from '../components/Navbar.jsx';
+// import Footer from '../components/Footer.jsx';
 
 export default function RouteOptimizationPage() {
   return (
-    <div className="min-h-screen flex flex-col pt-20 bg-[#F5F5F5]">
-      <Navbar />
-      
-      {/* Page Hero */}
-      <div className="bg-[#1A1A2E] py-16 px-6 md:px-10">
-        <div className="max-w-7xl mx-auto">
-          <Link to="/" className="text-[#FF5722] font-bold mb-6 inline-block hover:underline">← Back to Home</Link>
-          <div className="text-white/60 mb-2 font-medium tracking-wide">Home / Route Optimization</div>
-          <h1 className="text-white text-[40px] md:text-[56px] font-bold leading-tight mb-4">Smart Route Optimization</h1>
-          <p className="text-white/80 text-xl font-medium mb-6">From chaos to optimal in under 10 seconds</p>
-          <div className="w-12 h-1 bg-[#FF5722]"></div>
-        </div>
-      </div>
 
-      <main className="flex-grow max-w-7xl mx-auto px-4 md:px-10 py-10 md:py-16 w-full space-y-16">
+
+      <div className="flex-grow max-w-7xl mx-auto px-4 md:px-10 py-10 md:py-16 w-full space-y-16">
         
         {/* SECTION A — Before vs After Comparison */}
         <section>
@@ -154,9 +142,6 @@ export default function RouteOptimizationPage() {
             </div>
           </div>
         </section>
-      </main>
-
-      <Footer />
     </div>
   );
 }
