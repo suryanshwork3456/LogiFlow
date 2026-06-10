@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Search, Filter } from 'lucide-react';
 
 const KPIData = [
@@ -76,6 +76,12 @@ const TrendColors = {
 };
 
 export default function DashboardPage() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('All'); // 'All' | 'Active' | 'Warning'
+  const [showFilterMenu, setShowFilterMenu] = useState(false);
+  const filteredCompanies = CompanyData
+    .filter(co => co.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter(co => statusFilter === 'All' ? true : co.status === statusFilter);
   return (
     <div className="max-w-[1024px] mx-auto p-4 space-y-3 bg-[#F0F2F5] min-h-screen font-sans text-[#1A1A2E]">
       
@@ -144,12 +150,39 @@ export default function DashboardPage() {
           <div className="flex items-center space-x-2">
             <div className="relative">
               <Search className="w-3 h-3 absolute left-2 top-1.5 text-white/50" />
-              <input type="text" placeholder="Search..." className="bg-white/10 border border-white/5 rounded-md py-1 pl-7 pr-3 text-[11px] text-white outline-none w-40 placeholder-white/50 focus:ring-1 focus:ring-[#FF5722]" />
+              <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                    className="bg-white/10 border border-white/5 rounded-md py-1 pl-7 pr-3 text-[11px] text-white outline-none w-40 placeholder-white/50 focus:ring-1 focus:ring-[#FF5722]"
+              />
             </div>
-            <button className="flex items-center space-x-1.5 bg-white/5 border border-white/10 px-3 py-1 rounded text-[11px] hover:bg-white/10 transition-colors">
-              <Filter className="w-3 h-3" />
-              <span>Filter</span>
-            </button>
+            <div className="relative">
+  <button
+    onClick={() => setShowFilterMenu(p => !p)}
+    className="flex items-center space-x-1.5 bg-white/5 border border-white/10 px-3 py-1 rounded text-[11px] hover:bg-white/10 transition-colors"
+  >
+    <Filter className="w-3 h-3" />
+    <span>Filter</span>
+    {statusFilter !== 'All' && (
+      <span className="bg-[#FF5722] text-white rounded-full w-3.5 h-3.5 flex items-center justify-center text-[8px] font-bold">!</span>
+    )}
+  </button>
+  {showFilterMenu && (
+    <div className="absolute right-0 mt-1 bg-[#242438] border border-white/10 rounded-lg shadow-xl z-10 overflow-hidden text-[11px] w-28">
+      {['All', 'Active', 'Warning'].map(opt => (
+        <button
+          key={opt}
+          onClick={() => { setStatusFilter(opt); setShowFilterMenu(false); }}
+          className={`w-full text-left px-3 py-1.5 hover:bg-white/10 transition-colors ${statusFilter === opt ? 'text-[#FF5722] font-bold' : 'text-white/70'}`}
+        >
+          {opt}
+        </button>
+      ))}
+    </div>
+  )}
+</div>
           </div>
         </div>
         
@@ -171,37 +204,43 @@ export default function DashboardPage() {
                 <th className="py-1.5 px-3"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
-              {CompanyData.map((co, i) => (
-                <tr key={co.name} className="hover:bg-white/10 transition-colors group cursor-pointer text-white/90">
-                  <td className="py-1.5 px-3 text-white/50">{i + 1}</td>
-                  <td className="py-1.5 px-3 font-semibold">{co.name}</td>
-                  <td className="py-1.5 px-3">{co.riders}</td>
-                  <td className="py-1.5 px-3">{co.orders}</td>
-                  <td className="py-1.5 px-3">{co.delivered}</td>
-                  <td className="py-1.5 px-3 text-red-400">{co.failed}</td>
-                  <td className="py-1.5 px-3">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-12 h-1 bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full bg-[#FF5722]" style={{ width: `${co.rate}%` }}></div>
-                      </div>
-                      <span>{co.rate}%</span>
-                    </div>
-                  </td>
-                  <td className="py-1.5 px-3">{co.time} m</td>
-                  <td className="py-1.5 px-3">{co.cod}%</td>
-                  <td className="py-1.5 px-3 text-green-400">{co.fuel}</td>
-                  <td className="py-1.5 px-3">
-                    <span className={`px-2 py-0.5 rounded-full text-[9px] font-medium ${co.status === 'Active' ? 'bg-green-500/20 text-green-400' : 'bg-orange-500/20 text-orange-400'}`}>
-                      {co.status}
-                    </span>
-                  </td>
-                  <td className="py-1.5 px-3 text-right opacity-30 group-hover:opacity-100 transition-opacity">
-                    →
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+             <tbody className="divide-y divide-white/5">
+  {filteredCompanies.length > 0 ? filteredCompanies.map((co, i) => (
+    <tr key={co.name} className="hover:bg-white/10 transition-colors group cursor-pointer text-white/90">
+      <td className="py-1.5 px-3 text-white/50">{i + 1}</td>
+      <td className="py-1.5 px-3 font-semibold">{co.name}</td>
+      <td className="py-1.5 px-3">{co.riders}</td>
+      <td className="py-1.5 px-3">{co.orders}</td>
+      <td className="py-1.5 px-3">{co.delivered}</td>
+      <td className="py-1.5 px-3 text-red-400">{co.failed}</td>
+      <td className="py-1.5 px-3">
+        <div className="flex items-center space-x-2">
+          <div className="w-12 h-1 bg-white/10 rounded-full overflow-hidden">
+            <div className="h-full bg-[#FF5722]" style={{ width: `${co.rate}%` }}></div>
+          </div>
+          <span>{co.rate}%</span>
+        </div>
+      </td>
+      <td className="py-1.5 px-3">{co.time} m</td>
+      <td className="py-1.5 px-3">{co.cod}%</td>
+      <td className="py-1.5 px-3 text-green-400">{co.fuel}</td>
+      <td className="py-1.5 px-3">
+        <span className={`px-2 py-0.5 rounded-full text-[9px] font-medium ${co.status === 'Active' ? 'bg-green-500/20 text-green-400' : 'bg-orange-500/20 text-orange-400'}`}>
+          {co.status}
+        </span>
+      </td>
+      <td className="py-1.5 px-3 text-right opacity-30 group-hover:opacity-100 transition-opacity">
+        →
+      </td>
+    </tr>
+  )) : (
+    <tr>
+      <td colSpan={12} className="py-6 text-center text-white/30 text-[11px]">
+        No companies match your search.
+      </td>
+    </tr>
+  )}
+</tbody>
           </table>
         </div>
         <div className="mt-2 pt-2 text-center text-[10px] text-gray-500 border-t border-white/5 hover:text-white cursor-pointer transition-colors">
