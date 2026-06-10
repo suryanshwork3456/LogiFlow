@@ -79,6 +79,8 @@ export default function DashboardPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('All'); // 'All' | 'Active' | 'Warning'
   const [showFilterMenu, setShowFilterMenu] = useState(false);
+  const [alerts, setAlerts] = useState(AlertData);
+  const dismissAlert = (index) => setAlerts(prev => prev.filter((_, i) => i !== index));
   const filteredCompanies = CompanyData
     .filter(co => co.name.toLowerCase().includes(searchQuery.toLowerCase()))
     .filter(co => statusFilter === 'All' ? true : co.status === statusFilter);
@@ -394,18 +396,24 @@ export default function DashboardPage() {
         <div className="bg-[#1A1A2E] rounded-xl shadow-sm p-3 text-white flex flex-col md:col-span-2 lg:col-span-1 h-[140px] overflow-hidden">
           <div className="flex justify-between items-center mb-2 shrink-0">
             <h4 className="text-[11px] font-bold">Critical Alerts</h4>
-            <span className="bg-[#C62828] px-1.5 rounded text-[9px] font-bold">7</span>
+            <span className="bg-[#C62828] px-1.5 rounded text-[9px] font-bold">{alerts.length}</span>
           </div>
           <div className="space-y-1.5 overflow-y-auto pr-1">
-            {AlertData.map((alt, i) => (
-              <div key={i} className={`border-l-2 pl-2 py-0.5 text-[9px] ${alt.color === 'danger' ? 'border-[#C62828]' : alt.color === 'warning' ? 'border-yellow-500' : 'border-green-500'}`}>
-                <div className="flex justify-between">
-                  <strong>{alt.title}</strong>
-                  <span className="text-gray-500 shrink-0 ml-2">{alt.time}</span>
-                </div>
-                <div className="text-gray-400">{alt.meta}</div>
-              </div>
-            ))}
+         {alerts.map((alt, i) => (
+  <div key={i} className={`border-l-2 pl-2 py-0.5 text-[9px] ${alt.color === 'danger' ? 'border-[#C62828]' : alt.color === 'warning' ? 'border-yellow-500' : 'border-green-500'}`}>
+    <div className="flex justify-between items-start">
+      <strong>{alt.title}</strong>
+      <div className="flex items-center gap-1.5 shrink-0 ml-2">
+        <span className="text-gray-500">{alt.time}</span>
+        <button
+          onClick={() => dismissAlert(i)}
+          className="text-white/20 hover:text-white/70 transition-colors leading-none"
+        >×</button>
+      </div>
+    </div>
+    <div className="text-gray-400">{alt.meta}</div>
+  </div>
+))}
           </div>
         </div>
 
