@@ -94,6 +94,10 @@ import CTABand from './components/CTABand.jsx';
 import Footer from './components/Footer.jsx';
 import useScrollReveal from './hooks/useScrollReveal.js';
 
+// Add import
+import DashboardPage from './pages/admin/DashboardPage.jsx';
+
+
 // Admin Layout
 import AdminLayout from './components/admin/AdminLayout.jsx';
 
@@ -136,6 +140,7 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
+      <Route path="/admin" element={<AdminLayout><DashboardPage /></AdminLayout>} />
       {/* Admin Routes */}
       <Route path="/admin/control-tower" element={<AdminLayout><ControlTowerPage /></AdminLayout>} />
       <Route path="/admin/live-tracking" element={<AdminLayout><LiveTrackingPage /></AdminLayout>} />
@@ -143,15 +148,10 @@ export default function App() {
       <Route path="/admin/route-optimization" element={<AdminLayout><RouteOptimizationPage /></AdminLayout>} />
       <Route path="/admin/smart-alerts" element={<AdminLayout><SmartAlertsPage /></AdminLayout>} />
       <Route path="/admin/shipment-feed" element={<AdminLayout><ShipmentFeedPage /></AdminLayout>} />
-
       {/* Rider Routes */}
-<Route path="/rider/dashboard" element={<RiderDashboard />} />
-
-{/* Company Routes */}
-<Route path="/company/dashboard" element={<CompanyDashboard />} />
-
-
-
+      <Route path="/rider/dashboard" element={<RiderDashboard />} />
+      {/* Company Routes */}
+      <Route path="/company/dashboard" element={<CompanyDashboard />} />
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
