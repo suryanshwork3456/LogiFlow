@@ -3,6 +3,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
+// Rider Pages
 import RiderDashboard from "./pages/rider/RiderDashboard.jsx";
 import RiderMap from "./pages/rider/RiderMap.jsx";
 import RiderFeedback from "./pages/rider/RiderFeedback.jsx";
@@ -32,6 +33,7 @@ import useScrollReveal from "./hooks/useScrollReveal.js";
 import AdminLayout from "./components/admin/AdminLayout.jsx";
 
 // Admin Pages
+import DashboardPage from "./pages/admin/DashboardPage.jsx";
 import ControlTowerPage from "./pages/admin/ControlTowerPage.jsx";
 import LiveTrackingPage from "./pages/admin/LiveTrackingPage.jsx";
 import AIDelayPredictionPage from "./pages/admin/AIDelayPredictionPage.jsx";
@@ -49,7 +51,6 @@ function HomePage() {
   return (
     <div className="min-h-screen flex flex-col pt-20">
       <Navbar />
-
       <main className="flex-grow">
         <HeroSection />
         <StatsBar />
@@ -59,7 +60,6 @@ function HomePage() {
         <Testimonials />
         <CTABand />
       </main>
-
       <Footer />
     </div>
   );
@@ -68,66 +68,19 @@ function HomePage() {
 export default function App() {
   return (
     <Routes>
-
       {/* Public */}
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
       {/* Admin */}
-      <Route
-        path="/admin/control-tower"
-        element={
-          <AdminLayout>
-            <ControlTowerPage />
-          </AdminLayout>
-        }
-      />
-
-      <Route
-        path="/admin/live-tracking"
-        element={
-          <AdminLayout>
-            <LiveTrackingPage />
-          </AdminLayout>
-        }
-      />
-
-      <Route
-        path="/admin/ai-prediction"
-        element={
-          <AdminLayout>
-            <AIDelayPredictionPage />
-          </AdminLayout>
-        }
-      />
-
-      <Route
-        path="/admin/route-optimization"
-        element={
-          <AdminLayout>
-            <RouteOptimizationPage />
-          </AdminLayout>
-        }
-      />
-
-      <Route
-        path="/admin/smart-alerts"
-        element={
-          <AdminLayout>
-            <SmartAlertsPage />
-          </AdminLayout>
-        }
-      />
-
-      <Route
-        path="/admin/shipment-feed"
-        element={
-          <AdminLayout>
-            <ShipmentFeedPage />
-          </AdminLayout>
-        }
-      />
+      <Route path="/admin" element={<AdminLayout><DashboardPage /></AdminLayout>} />
+      <Route path="/admin/control-tower" element={<AdminLayout><ControlTowerPage /></AdminLayout>} />
+      <Route path="/admin/live-tracking" element={<AdminLayout><LiveTrackingPage /></AdminLayout>} />
+      <Route path="/admin/ai-prediction" element={<AdminLayout><AIDelayPredictionPage /></AdminLayout>} />
+      <Route path="/admin/route-optimization" element={<AdminLayout><RouteOptimizationPage /></AdminLayout>} />
+      <Route path="/admin/smart-alerts" element={<AdminLayout><SmartAlertsPage /></AdminLayout>} />
+      <Route path="/admin/shipment-feed" element={<AdminLayout><ShipmentFeedPage /></AdminLayout>} />
 
       {/* Rider */}
       <Route path="/rider/dashboard" element={<RiderDashboard />} />
@@ -136,40 +89,15 @@ export default function App() {
 
       {/* Company */}
       <Route path="/company/dashboard" element={<CompanyDashboard />} />
-
-      <Route
-        path="/company/operations"
-        element={<CompanyOperations />}
-      />
-
+      <Route path="/company/operations" element={<CompanyOperations />} />
       <Route path="/company/map" element={<CompanyMap />} />
-
-      <Route
-        path="/company/feedback"
-        element={<CompanyFeedback />}
-      />
-
-      <Route
-        path="/company/deliveries"
-        element={<CompanyDeliveries />}
-      />
-
-      <Route
-        path="/company/analytics"
-        element={<CompanyAnalytics />}
-      />
-
-      <Route
-        path="/company/alerts"
-        element={<CompanyAlerts />}
-      />
+      <Route path="/company/feedback" element={<CompanyFeedback />} />
+      <Route path="/company/deliveries" element={<CompanyDeliveries />} />
+      <Route path="/company/analytics" element={<CompanyAnalytics />} />
+      <Route path="/company/alerts" element={<CompanyAlerts />} />
 
       {/* Fallback */}
-      <Route
-        path="*"
-        element={<Navigate to="/" replace />}
-      />
-
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

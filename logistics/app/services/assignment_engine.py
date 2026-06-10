@@ -25,11 +25,11 @@ from app.models.models import Order, Rider, Supermarket, OrderStatus, RiderStatu
 from app.schemas.schemas import AssignmentResult, BatchAssignmentResult
 from app.services.batching_service import build_batches, BatchGroup
 from app.services.scoring_service import rank_riders_for_batch, ScoreBreakdown
-from app.db.redis_client import (
-    get_rider_active_orders,
-    increment_rider_orders,
-    publish_event,
-)
+# from app.db.redis_client import (
+#     get_rider_active_orders,
+#     increment_rider_orders,
+#     publish_event,
+# )
 
 logger = logging.getLogger(__name__)
 
@@ -62,13 +62,27 @@ async def _fetch_supermarket(db: AsyncSession, supermarket_id: int) -> Supermark
     return result.scalar_one_or_none()
 
 
-async def _build_active_orders_map(riders: List[Rider]) -> Dict[int, int]:
-    """Query Redis for each rider's live active-order count."""
-    mapping = {}
-    for rider in riders:
-        mapping[rider.id] = await get_rider_active_orders(rider.id)
-    return mapping
+async def _build_active_orders_map(riders: List[Rider], db: AsyncSession) -> Dict[int, int]:
+    """Query Postgres for each rider's active order count."""
+    from sqlalchemy import func
+    from app.models.models import OrderStatus
 
+    rider_ids = [r.id for r in riders]
+    result = await db.execute(
+        select(Order.rider_id, func.count(Order.id))
+        .where(
+            Order.rider_id.in_(rider_ids),
+            Order.status.in_([OrderStatus.assigned, OrderStatus.picked_up])
+        )
+        .group_by(Order.rider_id)
+    )
+    rows = result.all()
+
+    # default 0 for riders with no active orders
+    mapping = {r.id: 0 for r in riders}
+    for rider_id, count in rows:
+        mapping[rider_id] = count
+    return mapping
 
 # ── Core assignment logic ─────────────────────────────────────────────────────
 

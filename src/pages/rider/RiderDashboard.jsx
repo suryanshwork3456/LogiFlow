@@ -1,83 +1,66 @@
-import { useNavigate } from "react-router-dom";
+// filepath: src/pages/rider/RiderDashboard.jsx
 
-export default function RiderDashboard() {
-  const navigate = useNavigate();
+import { useState, useRef, useEffect } from "react";
+import Navbar from "../../components/rider/Navbar";
+import Sidebar from "../../components/rider/Sidebar";
+import Dashboard from "../../components/rider/dashboard/Dashboard";
+import DeliveryStatus from "../../components/rider/delivery/DeliveryStatus";
+import DeliveryHistory from "../../components/rider/delivery/DeliveryHistory";
+import RouteMap from "../../components/rider/RouteMap";
+import NearbyRiders from "../../components/rider/NearbyRiders";
+import Ratings from "../../components/rider/Ratings";
+
+function RiderDashboard() {
+  const [activeTab, setActiveTab] = useState("Dashboard");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "Delivery Status":   return <DeliveryStatus />;
+      case "Route Map":         return <RouteMap />;
+      case "Delivery History":  return <DeliveryHistory />;
+      case "Nearby Riders":     return <NearbyRiders />;
+      case "Ratings":           return <Ratings />;
+      default:                  return <Dashboard />;
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center px-6">
-      <div className="w-full max-w-5xl">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <div className="text-6xl mb-4">🚚</div>
+    <div style={{ display: "flex", minHeight: "100vh", background: "#f8fafc" }}>
+      <Sidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
 
-          <h1 className="text-4xl font-bold text-[#1A1A2E] mb-3">
-            Rider Portal
-          </h1>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+        <Navbar
+          activeTab={activeTab}
+          profileOpen={profileOpen}
+          setProfileOpen={setProfileOpen}
+          profileRef={profileRef}
+          setSidebarOpen={setSidebarOpen}
+        />
 
-          <p className="text-[#555F6D] text-lg">
-            Manage deliveries, optimize routes, track performance and grow your earnings.
-          </p>
-        </div>
-
-        {/* Feature Cards */}
-        <div className="grid md:grid-cols-2 gap-6">
-          
-          {/* Smart Rider Hub */}
-          <div className="bg-white rounded-3xl shadow-lg p-8 border border-gray-100">
-            <div className="text-5xl mb-4">🚀</div>
-
-            <h2 className="text-2xl font-bold text-[#1A1A2E] mb-3">
-              Smart Rider Hub
-            </h2>
-
-            <p className="text-gray-600 mb-6">
-              AI Route Optimization, ETA Tracking and Rider Transfer Network.
-            </p>
-
-            <ul className="space-y-2 text-sm text-gray-600 mb-6">
-              <li>✅ Smart Route Planning</li>
-              <li>✅ Live ETA Tracking</li>
-              <li>✅ Nearby Riders</li>
-              <li>✅ Transfer Delivery Requests</li>
-            </ul>
-
-            <button
-              onClick={() => navigate("/rider/map")}
-              className="bg-[#FF5A1F] hover:bg-[#e84d15] text-white px-6 py-3 rounded-xl font-semibold transition"
-            >
-              Launch Hub
-            </button>
-          </div>
-
-          {/* Feedback & Earnings */}
-          <div className="bg-white rounded-3xl shadow-lg p-8 border border-gray-100">
-            <div className="text-5xl mb-4">⭐</div>
-
-            <h2 className="text-2xl font-bold text-[#1A1A2E] mb-3">
-              Feedback & Earnings
-            </h2>
-
-            <p className="text-gray-600 mb-6">
-              View ratings, customer reviews, tips earned and AI suggestions to improve performance.
-            </p>
-
-            <ul className="space-y-2 text-sm text-gray-600 mb-6">
-              <li>⭐ Customer Ratings</li>
-              <li>📝 Review History</li>
-              <li>💰 Tips & Earnings</li>
-              <li>🤖 AI Improvement Coach</li>
-            </ul>
-
-            <button
-              onClick={() => navigate("/rider/feedback")}
-              className="border-2 border-[#FF5A1F] text-[#FF5A1F] hover:bg-[#FF5A1F] hover:text-white px-6 py-3 rounded-xl font-semibold transition"
-            >
-              View Feedback
-            </button>
-          </div>
-
-        </div>
+        <main style={{ padding: 24, flex: 1 }}>
+          {renderContent()}
+        </main>
       </div>
     </div>
   );
 }
+
+export default RiderDashboard;
