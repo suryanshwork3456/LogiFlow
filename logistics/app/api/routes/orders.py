@@ -8,7 +8,7 @@ from app.db.session import get_db
 from app.models.models import Order, OrderStatus, Rider, RiderStatus
 from app.schemas.schemas import OrderCreate, OrderOut, OrderStatusUpdate, AssignmentResult
 from app.services.assignment_engine import assign_single_order
-from app.db.redis_client import decrement_rider_orders, publish_event
+# from app.db.redis_client import decrement_rider_orders, publish_event
 
 router = APIRouter(prefix="/orders", tags=["Orders"])
 
@@ -95,7 +95,7 @@ async def update_order_status(
         order.delivered_at = now
         # Decrement rider's active order count in Redis
         if order.rider_id:
-            await decrement_rider_orders(order.rider_id)
+            # await decrement_rider_orders(order.rider_id)
             # Increment total deliveries on rider
             rider = await db.get(Rider, order.rider_id)
             if rider:
@@ -105,13 +105,13 @@ async def update_order_status(
     await db.refresh(order)
 
     # Publish status change event
-    await publish_event("status_updates", {
-        "event": "order_status_changed",
-        "order_id": order_id,
-        "old_status": old_status,
-        "new_status": data.status,
-        "rider_id": order.rider_id,
-    })
+    # await publish_event("status_updates", {
+    #     "event": "order_status_changed",
+    #     "order_id": order_id,
+    #     "old_status": old_status,
+    #     "new_status": data.status,
+    #     "rider_id": order.rider_id,
+    # })
 
     return order
 

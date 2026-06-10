@@ -15,7 +15,7 @@ from sqlalchemy import select
 
 from app.models.models import RiderRating, Rider, Order, OrderStatus
 from app.schemas.schemas import RatingCreate, RatingOut
-from app.db.redis_client import publish_event
+# from app.db.redis_client import publish_event
 
 logger = logging.getLogger(__name__)
 
@@ -70,13 +70,13 @@ async def submit_rating(
     await db.refresh(rating)
 
     # Publish rating event
-    await publish_event("ratings", {
-        "event": "rider_rated",
-        "rider_id": rider.id,
-        "order_id": data.order_id,
-        "stars": data.stars,
-        "new_avg": rider.avg_rating,
-    })
+    # await publish_event("ratings", {
+    #     "event": "rider_rated",
+    #     "rider_id": rider.id,
+    #     "order_id": data.order_id,
+    #     "stars": data.stars,
+    #     "new_avg": rider.avg_rating,
+    # })
 
     logger.info(
         "Rider %d rated %.1f stars (new avg: %.2f over %d ratings)",
