@@ -36,7 +36,6 @@ class Supermarket(Base):
     lon         = Column(Float, nullable=False)
     is_active   = Column(Boolean, default=True)
     created_at  = Column(DateTime(timezone=True), server_default=func.now())
-
     orders      = relationship("Order", back_populates="supermarket")
 
 
@@ -88,7 +87,7 @@ class Order(Base):
     __tablename__ = "orders"
 
     id              = Column(Integer, primary_key=True, index=True)
-    customer_id     = Column(Integer, ForeignKey("customers.id"), nullable=False)
+    customer_id     = Column(Integer, ForeignKey("customers.id"), nullable=True)
     supermarket_id  = Column(Integer, ForeignKey("supermarkets.id"), nullable=False)
     rider_id        = Column(Integer, ForeignKey("riders.id"), nullable=True)
 

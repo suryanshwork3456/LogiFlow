@@ -11,9 +11,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.db.session import engine
-from app.db.redis_client import get_redis, close_redis
+# from app.db.redis_client import get_redis, close_redis
 from app.models.models import Base
-from app.utils.websocket_manager import redis_event_listener
+# from app.utils.websocket_manager import redis_event_listener
 
 # ── Routes ────────────────────────────────────────────────────────────────────
 from app.api.routes.auth         import router as auth_router
@@ -22,6 +22,8 @@ from app.api.routes.riders       import router as riders_router
 from app.api.routes.supermarkets import router as supermarkets_router
 from app.api.routes.ratings      import router as ratings_router
 from app.api.routes.websockets   import router as ws_router
+from app.api.routes.customers    import router as customers_router
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -39,17 +41,17 @@ async def lifespan(app: FastAPI):
         await conn.run_sync(Base.metadata.create_all)
 
     # Verify Redis
-    await get_redis()
-    logger.info("Redis connected")
+    # await get_redis()
+    # # logger.info("Redis connected")
 
-    # Start Redis Pub/Sub listener as background task
-    task = asyncio.create_task(redis_event_listener())
+    # # Start Redis Pub/Sub listener as background task
+    # task = asyncio.create_task(redis_event_listener())
 
     yield
 
-    # Shutdown
-    task.cancel()
-    await close_redis()
+    # # Shutdown
+    # task.cancel()
+    # await close_redis()
     await engine.dispose()
     logger.info("Logistics API shut down cleanly")
 
@@ -80,6 +82,7 @@ app.include_router(supermarkets_router, prefix="/api")
 app.include_router(ratings_router,      prefix="/api")
 app.include_router(ws_router)           # WebSocket — no /api prefix
 
+app.include_router(customers_router, prefix="/api")
 
 @app.get("/health")
 async def health_check():
