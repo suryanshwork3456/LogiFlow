@@ -1,11 +1,69 @@
-export default function RiderDashboard() {
-  return (
-    <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center">
-      <div className="text-center">
-        <div className="text-5xl mb-4">🚚</div>
-        <h1 className="text-2xl font-bold text-[#1A1A2E] mb-2">Rider Portal</h1>
-        <p className="text-[#555F6D]">Under construction — your teammate will build this.</p>
-      </div>
+import { useState, useRef, useEffect } from "react";
+import Navbar from "../../components/rider/Navbar";
+import Sidebar from "../../components/rider/Sidebar";
+import Dashboard from "../../components/rider/dashboard/Dashboard";
+import DeliveryStatus from "../../components/rider/delivery/DeliveryStatus";
+import DeliveryHistory from "../../components/rider/delivery/DeliveryHistory";
+import RouteMap from "../../components/rider/RouteMap";
+import NearbyRiders from "../../components/rider/NearbyRiders";
+import Ratings from "../../components/rider/Ratings";
+
+
+function RiderDashboard() {
+  const [activeTab, setActiveTab] = useState("Dashboard");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "Delivery Status": return <DeliveryStatus />;
+      case "Route Map": return <RouteMap />;
+      case "Delivery History": return <DeliveryHistory />;
+      case "Nearby Riders": return <NearbyRiders />;
+      case "Ratings": return <Ratings />;
+      default: return <Dashboard />;
+    }
+  };
+   return (
+  <div
+    style={{
+      display: "flex",
+      minHeight: "100vh",
+      background: "#f8fafc",
+    }}
+  >
+    <Sidebar
+      activeTab={activeTab}
+      setActiveTab={setActiveTab}
+      sidebarOpen={sidebarOpen}
+      setSidebarOpen={setSidebarOpen}
+    />
+
+    <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+      <Navbar
+        activeTab={activeTab}
+        profileOpen={profileOpen}
+        setProfileOpen={setProfileOpen}
+        profileRef={profileRef}
+        setSidebarOpen={setSidebarOpen}
+      />
+
+      <main style={{ padding: 24, flex: 1 }}>
+        {renderContent()}
+      </main>
     </div>
-  );
+  </div>
+);
 }
+export default RiderDashboard;

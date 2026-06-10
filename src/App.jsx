@@ -80,7 +80,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import RiderDashboard from './pages/rider/RiderDashboard.jsx';
 import CompanyDashboard from './pages/company/CompanyDashboard.jsx';
-
+ 
 
 // Public Components
 import Navbar from './components/Navbar.jsx';
@@ -146,6 +146,7 @@ export default function App() {
 
       {/* Rider Routes */}
 <Route path="/rider/dashboard" element={<RiderDashboard />} />
+ 
 
 {/* Company Routes */}
 <Route path="/company/dashboard" element={<CompanyDashboard />} />
