@@ -1,0 +1,355 @@
+{
+  "city": "Lucknow",
+  "supermarkets": [
+    {
+      "id": "SM-001",
+      "name": "FreshMart",
+      "lat": 26.87831,
+      "lon": 80.954862,
+      "rating": 4.1
+    },
+    {
+      "id": "SM-002",
+      "name": "QuickShop",
+      "lat": 26.893739,
+      "lon": 80.929755,
+      "rating": 3.7
+    },
+    {
+      "id": "SM-003",
+      "name": "DailyBasket",
+      "lat": 26.772522,
+      "lon": 80.979089,
+      "rating": 4.4
+    },
+    {
+      "id": "SM-004",
+      "name": "MegaStore",
+      "lat": 26.784701,
+      "lon": 80.888911,
+      "rating": 4.8
+    },
+    {
+      "id": "SM-005",
+      "name": "CityGrocer",
+      "lat": 26.850811,
+      "lon": 80.869962,
+      "rating": 3.9
+    },
+    {
+      "id": "SM-006",
+      "name": "SuperSave",
+      "lat": 26.810197,
+      "lon": 81.007577,
+      "rating": 4.9
+    },
+    {
+      "id": "SM-007",
+      "name": "PrimePick",
+      "lat": 26.871772,
+      "lon": 80.999685,
+      "rating": 4.1
+    },
+    {
+      "id": "SM-008",
+      "name": "ValueMart",
+      "lat": 26.924284,
+      "lon": 80.933052,
+      "rating": 4.1
+    },
+    {
+      "id": "SM-009",
+      "name": "FoodHub",
+      "lat": 26.844299,
+      "lon": 80.913481,
+      "rating": 3.8
+    },
+    {
+      "id": "SM-010",
+      "name": "GreenGrocer",
+      "lat": 26.879285,
+      "lon": 80.987536,
+      "rating": 4.6
+    },
+    {
+      "id": "SM-011",
+      "name": "SmartShop",
+      "lat": 26.869121,
+      "lon": 80.929664,
+      "rating": 4.5
+    },
+    {
+      "id": "SM-012",
+      "name": "BestBuy Mart",
+      "lat": 26.835582,
+      "lon": 80.901741,
+      "rating": 4.1
+    },
+    {
+      "id": "SM-013",
+      "name": "EasyCart",
+      "lat": 26.868555,
+      "lon": 80.935482,
+      "rating": 4.6
+    },
+    {
+      "id": "SM-014",
+      "name": "PeoplesMart",
+      "lat": 26.774257,
+      "lon": 80.993361,
+      "rating": 3.9
+    },
+    {
+      "id": "SM-015",
+      "name": "UrbanStore",
+      "lat": 26.858381,
+      "lon": 80.961481,
+      "rating": 4.5
+    },
+    {
+      "id": "SM-016",
+      "name": "FastGrocer",
+      "lat": 26.783844,
+      "lon": 80.86663,
+      "rating": 4.9
+    },
+    {
+      "id": "SM-017",
+      "name": "NearbyMart",
+      "lat": 26.795872,
+      "lon": 80.995219,
+      "rating": 4.1
+    },
+    {
+      "id": "SM-018",
+      "name": "LocalHub",
+      "lat": 26.877992,
+      "lon": 80.892496,
+      "rating": 3.6
+    },
+    {
+      "id": "SM-019",
+      "name": "TownShop",
+      "lat": 26.857678,
+      "lon": 80.913466,
+      "rating": 3.8
+    },
+    {
+      "id": "SM-020",
+      "name": "FreshZone",
+      "lat": 26.88376,
+      "lon": 80.956028,
+      "rating": 4.9
+    },
+    {
+      "id": "SM-021",
+      "name": "QuickBuy",
+      "lat": 26.879912,
+      "lon": 80.932074,
+      "rating": 3.8
+    },
+    {
+      "id": "SM-022",
+      "name": "DailyNeeds",
+      "lat": 26.797615,
+      "lon": 80.926585,
+      "rating": 5.0
+    },
+    {
+      "id": "SM-023",
+      "name": "MegaMart",
+      "lat": 26.775422,
+      "lon": 81.007498,
+      "rating": 4.2
+    },
+    {
+      "id": "SM-024",
+      "name": "CitySupermart",
+      "lat": 26.821467,
+      "lon": 80.898072,
+      "rating": 4.4
+    },
+    {
+      "id": "SM-025",
+      "name": "SaveMore",
+      "lat": 26.881483,
+      "lon": 80.892223,
+      "rating": 4.9
+    },
+    {
+      "id": "SM-026",
+      "name": "PrimeMart",
+      "lat": 26.825978,
+      "lon": 81.013068,
+      "rating": 4.4
+    },
+    {
+      "id": "SM-027",
+      "name": "ValueShop",
+      "lat": 26.805701,
+      "lon": 81.012611,
+      "rating": 4.2
+    },
+    {
+      "id": "SM-028",
+      "name": "FoodZone",
+      "lat": 26.91071,
+      "lon": 80.94834,
+      "rating": 5.0
+    },
+    {
+      "id": "SM-029",
+      "name": "GreenMart",
+      "lat": 26.859529,
+      "lon": 81.024799,
+      "rating": 4.9
+    },
+    {
+      "id": "SM-030",
+      "name": "SmartCart",
+      "lat": 26.776702,
+      "lon": 80.872868,
+      "rating": 4.3
+    },
+    {
+      "id": "SM-031",
+      "name": "BestMart",
+      "lat": 26.82083,
+      "lon": 80.961667,
+      "rating": 4.5
+    },
+    {
+      "id": "SM-032",
+      "name": "EasyShop",
+      "lat": 26.77139,
+      "lon": 80.884345,
+      "rating": 3.9
+    },
+    {
+      "id": "SM-033",
+      "name": "PeoplesStore",
+      "lat": 26.800873,
+      "lon": 80.990583,
+      "rating": 4.7
+    },
+    {
+      "id": "SM-034",
+      "name": "UrbanMart",
+      "lat": 26.870248,
+      "lon": 80.899736,
+      "rating": 4.8
+    },
+    {
+      "id": "SM-035",
+      "name": "FastShop",
+      "lat": 26.767038,
+      "lon": 80.990521,
+      "rating": 4.1
+    },
+    {
+      "id": "SM-036",
+      "name": "NearbyCart",
+      "lat": 26.823052,
+      "lon": 81.015872,
+      "rating": 4.8
+    },
+    {
+      "id": "SM-037",
+      "name": "LocalMart",
+      "lat": 26.876318,
+      "lon": 80.986321,
+      "rating": 4.2
+    },
+    {
+      "id": "SM-038",
+      "name": "TownMart",
+      "lat": 26.780182,
+      "lon": 80.943806,
+      "rating": 3.8
+    },
+    {
+      "id": "SM-039",
+      "name": "FreshHub",
+      "lat": 26.844269,
+      "lon": 80.93034,
+      "rating": 4.3
+    },
+    {
+      "id": "SM-040",
+      "name": "QuickZone",
+      "lat": 26.858008,
+      "lon": 81.010144,
+      "rating": 4.5
+    },
+    {
+      "id": "SM-041",
+      "name": "DailySave",
+      "lat": 26.774036,
+      "lon": 80.964422,
+      "rating": 4.4
+    },
+    {
+      "id": "SM-042",
+      "name": "MegaHub",
+      "lat": 26.918837,
+      "lon": 80.879118,
+      "rating": 4.5
+    },
+    {
+      "id": "SM-043",
+      "name": "CityStore",
+      "lat": 26.853526,
+      "lon": 81.022008,
+      "rating": 4.8
+    },
+    {
+      "id": "SM-044",
+      "name": "SaveZone",
+      "lat": 26.907701,
+      "lon": 80.96829,
+      "rating": 4.5
+    },
+    {
+      "id": "SM-045",
+      "name": "PrimeSave",
+      "lat": 26.853042,
+      "lon": 80.999983,
+      "rating": 3.7
+    },
+    {
+      "id": "SM-046",
+      "name": "ValueZone",
+      "lat": 26.914506,
+      "lon": 80.953233,
+      "rating": 4.8
+    },
+    {
+      "id": "SM-047",
+      "name": "FoodSave",
+      "lat": 26.867862,
+      "lon": 80.965517,
+      "rating": 4.5
+    },
+    {
+      "id": "SM-048",
+      "name": "GreenHub",
+      "lat": 26.815924,
+      "lon": 80.911684,
+      "rating": 4.2
+    },
+    {
+      "id": "SM-049",
+      "name": "SmartSave",
+      "lat": 26.906856,
+      "lon": 80.879524,
+      "rating": 3.6
+    },
+    {
+      "id": "SM-050",
+      "name": "BestZone",
+      "lat": 26.789065,
+      "lon": 80.985319,
+      "rating": 4.1
+    }
+  ]
+}

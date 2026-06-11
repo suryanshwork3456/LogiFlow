@@ -19,7 +19,7 @@ import logging
 from typing import Dict, Set
 from fastapi import WebSocket, WebSocketDisconnect
 
-from app.db.redis_client import get_redis, set_rider_location, publish_event
+# from app.db.redis_client import get_redis, set_rider_location, publish_event
 
 logger = logging.getLogger(__name__)
 
@@ -98,13 +98,13 @@ class ConnectionManager:
         if msg_type == "location":
             lat, lon = msg.get("lat"), msg.get("lon")
             if lat is not None and lon is not None:
-                await set_rider_location(rider_id, lat, lon)
-                await publish_event("locations", {
-                    "event": "rider_location",
-                    "rider_id": rider_id,
-                    "lat": lat,
-                    "lon": lon,
-                })
+                # await set_rider_location(rider_id, lat, lon)
+                # await publish_event("locations", {
+                #     "event": "rider_location",
+                #     "rider_id": rider_id,
+                #     "lat": lat,
+                #     "lon": lon,
+                # })
                 await self._broadcast_dashboard({
                     "event": "rider_location",
                     "rider_id": rider_id,
@@ -132,33 +132,33 @@ manager = ConnectionManager()
 
 # ── Redis subscriber (run as background task) ─────────────────────────────────
 
-async def redis_event_listener():
-    """
-    Listens to Redis channels and forwards events to the correct WebSocket clients.
-    Run this as an asyncio background task on app startup.
-    """
-    r = await get_redis()
-    pubsub = r.pubsub()
-    await pubsub.subscribe("assignments", "ratings", "locations", "status_updates")
+# async def redis_event_listener():
+#     """
+#     Listens to Redis channels and forwards events to the correct WebSocket clients.
+#     Run this as an asyncio background task on app startup.
+#     """
+#     r = await get_redis()
+#     pubsub = r.pubsub()
+#     await pubsub.subscribe("assignments", "ratings", "locations", "status_updates")
 
-    logger.info("Redis event listener started")
+#     logger.info("Redis event listener started")
 
-    async for message in pubsub.listen():
-        if message["type"] != "message":
-            continue
-        try:
-            data = json.loads(message["data"])
-            channel = message["channel"]
+#     async for message in pubsub.listen():
+#         if message["type"] != "message":
+#             continue
+#         try:
+#             data = json.loads(message["data"])
+#             channel = message["channel"]
 
-            # Forward assignment events to specific rider
-            if channel == "assignments":
-                rider_id = data.get("rider_id")
-                if rider_id:
-                    await manager.send_to_rider(rider_id, data)
-                await manager._broadcast_dashboard(data)
+#             # Forward assignment events to specific rider
+#             if channel == "assignments":
+#                 rider_id = data.get("rider_id")
+#                 if rider_id:
+#                     await manager.send_to_rider(rider_id, data)
+#                 await manager._broadcast_dashboard(data)
 
-            elif channel in ("ratings", "status_updates"):
-                await manager._broadcast_dashboard(data)
+#             elif channel in ("ratings", "status_updates"):
+#                 await manager._broadcast_dashboard(data)
 
-        except Exception as exc:
-            logger.error("Redis listener error: %s", exc)
+#         except Exception as exc:
+#             logger.error("Redis listener error: %s", exc)

@@ -4,11 +4,11 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     # Database
-    DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5432/logistics_db"
-    SYNC_DATABASE_URL: str = "postgresql+psycopg2://user:password@localhost:5432/logistics_db"
+    DATABASE_URL: str = "postgresql+asyncpg://postgres:postgresaks@localhost:5432/delivery"
+    SYNC_DATABASE_URL: str = "postgresql+psycopg2://postgres:postgresaks@localhost:5432/delivery"
 
     # Redis
-    REDIS_URL: str = "redis://localhost:6379/0"
+    # REDIS_URL: str = "redis://localhost:6379/0"
 
     # Auth
     SECRET_KEY: str = "change-this-secret"
