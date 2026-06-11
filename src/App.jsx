@@ -80,6 +80,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import RiderDashboard from './pages/rider/RiderDashboard.jsx';
 import CompanyDashboard from './pages/company/CompanyDashboard.jsx';
+import Profile from "./pages/company/profile.jsx";
  
 
 // Public Components
@@ -141,20 +142,15 @@ export default function App() {
       <Route path="/register" element={<Register />} />
 
       <Route path="/admin" element={<AdminLayout><DashboardPage /></AdminLayout>} />
-      {/* Admin Routes */}
       <Route path="/admin/control-tower" element={<AdminLayout><ControlTowerPage /></AdminLayout>} />
       <Route path="/admin/live-tracking" element={<AdminLayout><LiveTrackingPage /></AdminLayout>} />
       <Route path="/admin/ai-prediction" element={<AdminLayout><AIDelayPredictionPage /></AdminLayout>} />
       <Route path="/admin/route-optimization" element={<AdminLayout><RouteOptimizationPage /></AdminLayout>} />
       <Route path="/admin/smart-alerts" element={<AdminLayout><SmartAlertsPage /></AdminLayout>} />
       <Route path="/admin/shipment-feed" element={<AdminLayout><ShipmentFeedPage /></AdminLayout>} />
-      {/* Rider Routes */}
 <Route path="/rider/dashboard" element={<RiderDashboard />} />
-
-{/* Company Routes */}
 <Route path="/company/dashboard" element={<CompanyDashboard />} />
-
-
+<Route path="/company/profile" element={<Profile />} />
 
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />
