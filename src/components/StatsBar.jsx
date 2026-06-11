@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function StatsBar() {
   return (
-    <section className="bg-[#FFFFFF] py-10 relative group z-10 w-full overflow-visible">
+    <section  className="bg-[#FFFFFF] py-10 relative group z-10 w-full overflow-visible">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="bg-[#1A1A2E] rounded-[2rem] p-8 lg:p-12 shadow-2xl overflow-hidden relative">
           <div className="flex flex-col md:flex-row items-center justify-around gap-12 md:gap-4 relative z-10">

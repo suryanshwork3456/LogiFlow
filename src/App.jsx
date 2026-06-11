@@ -7,8 +7,14 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import RiderDashboard from './pages/rider/RiderDashboard.jsx';
 import CompanyDashboard from './pages/company/CompanyDashboard.jsx';
 import Profile from "./pages/company/profile.jsx";
- 
-
+import RiderMap from "./pages/rider/RiderMap.jsx";
+import RiderFeedback from "./pages/rider/RiderFeedback.jsx";
+import CompanyOperations from "./pages/company/CompanyOperations.jsx";
+import CompanyMap from "./pages/company/CompanyMap.jsx";
+import CompanyFeedback from "./pages/company/CompanyFeedback.jsx";
+import CompanyDeliveries from "./pages/company/CompanyDeliveries.jsx";
+import CompanyAnalytics from "./pages/company/CompanyAnalytics.jsx";
+import CompanyAlerts from "./pages/company/CompanyAlerts.jsx";
 // Public Components
 import Navbar from "./components/Navbar.jsx";
 import HeroSection from "./components/HeroSection.jsx";
@@ -23,6 +29,7 @@ import useScrollReveal from "./hooks/useScrollReveal.js";
 
 // Admin Layout
 import AdminLayout from "./components/admin/AdminLayout.jsx";
+
 
 // Admin Pages
 import DashboardPage from "./pages/admin/DashboardPage.jsx";

@@ -13,7 +13,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative pt-20 pb-24 overflow-hidden bg-[#FFFFFF]">
+    <section id="home" className="relative pt-20 pb-24 overflow-hidden bg-[#FFFFFF]">
       <div className="world-bg absolute inset-0 z-0 pointer-events-none"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
