@@ -4,9 +4,22 @@
 
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+
+import RiderMap from './pages/rider/RiderMap.jsx';
+import RiderFeedback from './pages/rider/RiderFeedback.jsx';
+
 import RiderDashboard from './pages/rider/RiderDashboard.jsx';
 import CompanyDashboard from './pages/company/CompanyDashboard.jsx';
+// Add these with your existing company imports
+import CompanyOperations from './pages/company/CompanyOperations.jsx';
+import CompanyMap from './pages/company/CompanyMap.jsx';
+import CompanyFeedback from './pages/company/CompanyFeedback.jsx';
+import CompanyDeliveries from './pages/company/CompanyDeliveries.jsx';
+import CompanyAnalytics from './pages/company/CompanyAnalytics.jsx';
+import CompanyAlerts from './pages/company/CompanyAlerts.jsx';
+
 import Profile from "./pages/company/profile.jsx";
+
  
 
 // Public Components
@@ -27,9 +40,9 @@ import AdminLayout from "./components/admin/AdminLayout.jsx";
 // Admin Pages
 import DashboardPage from "./pages/admin/DashboardPage.jsx";
 import ControlTowerPage from "./pages/admin/ControlTowerPage.jsx";
-import LiveTrackingPage from "./pages/admin/LiveTrackingPage.jsx";
-import AIDelayPredictionPage from "./pages/admin/AIDelayPredictionPage.jsx";
-import RouteOptimizationPage from "./pages/admin/RouteOptimizationPage.jsx";
+import LiveTrackingPage from './pages/admin/LiveTracking/index.jsx';
+import AIDelayPredictionPage from './pages/admin/AIDelayPrediction/index.jsx';
+import RouteOptimizationPage from './pages/admin/RouteOptimization/index.jsx';
 import SmartAlertsPage from "./pages/admin/SmartAlertsPage.jsx";
 import ShipmentFeedPage from "./pages/admin/ShipmentFeedPage.jsx";
 
