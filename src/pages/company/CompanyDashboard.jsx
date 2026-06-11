@@ -378,7 +378,6 @@ function KpiCard({
         transition
       "
     >
-
       <p className="text-gray-500">
         {title}
       </p>
@@ -386,7 +385,9 @@ function KpiCard({
       <h2 className={`text-4xl font-bold mt-3 ${valueClass}`}>
         {value}
       </h2>
-
+    </div>
+  );
+}
 import { useState } from "react";
 
 import Navbar from "../../components/company/Navbar2";
@@ -411,10 +412,26 @@ function CompanyDashboard({ company }) {
 
    return (
     <div style={S.page}>
-      <Navbar company={company} onToggleSidebar={() => setSidebarOpen(true)} />
-      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} activeTab={activeTab} onTabChange={setActiveTab} />
+      <Navbar
+        company={company}
+        onToggleSidebar={() => setSidebarOpen(true)}
+      />
+
+      <Sidebar
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
+
       <main style={{ paddingTop: 60, minHeight: "100vh" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 20px" }}>
+        <div
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            padding: "24px 20px",
+          }}
+        >
           {tabContent[activeTab]}
         </div>
       </main>
