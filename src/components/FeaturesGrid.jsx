@@ -164,7 +164,7 @@ export default function FeaturesGrid() {
   ];
 
   return (
-    <section className="py-24 bg-[#FFFFFF] relative overflow-hidden">
+    <section id="fleet" className="py-24 bg-[#FFFFFF] relative overflow-hidden">
       <div className="world-bg absolute inset-0 pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
