@@ -5,7 +5,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 from app.db.session import Base
 import enum
-
+from sqlalchemy.dialects.postgresql import ENUM
 
 # ── Enums ─────────────────────────────────────────────────────────────────────
 
@@ -53,7 +53,11 @@ class Rider(Base):
     current_lon     = Column(Float, nullable=True)
     location_updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
-    status          = Column(Enum(RiderStatus), default=RiderStatus.idle)
+    status = Column(
+        Enum(RiderStatus, native_enum=False), 
+        default=RiderStatus.idle, 
+        nullable=False
+    )
     max_capacity    = Column(Integer, default=4)   # max simultaneous orders
     is_active       = Column(Boolean, default=True)
 
@@ -66,6 +70,7 @@ class Rider(Base):
 
     orders          = relationship("Order", back_populates="rider")
     ratings         = relationship("RiderRating", back_populates="rider")
+    vehicle_type = Column(String(50), nullable=False, default="bike")
 
 
 class Customer(Base):

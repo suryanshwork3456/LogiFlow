@@ -1,21 +1,13 @@
 // filepath: src/App.jsx
 
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+// filepath: src/App.jsx
 
-// Rider Pages
-import RiderDashboard from "./pages/rider/RiderDashboard.jsx";
-import RiderMap from "./pages/rider/RiderMap.jsx";
-import RiderFeedback from "./pages/rider/RiderFeedback.jsx";
-
-// Company Pages
-import CompanyDashboard from "./pages/company/CompanyDashboard.jsx";
-import CompanyOperations from "./pages/company/CompanyOperations.jsx";
-import CompanyMap from "./pages/company/CompanyMap.jsx";
-import CompanyFeedback from "./pages/company/CompanyFeedback.jsx";
-import CompanyDeliveries from "./pages/company/CompanyDeliveries.jsx";
-import CompanyAnalytics from "./pages/company/CompanyAnalytics.jsx";
-import CompanyAlerts from "./pages/company/CompanyAlerts.jsx";
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import RiderDashboard from './pages/rider/RiderDashboard.jsx';
+import CompanyDashboard from './pages/company/CompanyDashboard.jsx';
+import Profile from "./pages/company/profile.jsx";
+ 
 
 // Public Components
 import Navbar from "./components/Navbar.jsx";
@@ -95,6 +87,9 @@ export default function App() {
       <Route path="/company/deliveries" element={<CompanyDeliveries />} />
       <Route path="/company/analytics" element={<CompanyAnalytics />} />
       <Route path="/company/alerts" element={<CompanyAlerts />} />
+<Route path="/rider/dashboard" element={<RiderDashboard />} />
+<Route path="/company/dashboard" element={<CompanyDashboard />} />
+<Route path="/company/profile" element={<Profile />} />
 
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />

@@ -27,12 +27,14 @@ class SupermarketOut(SupermarketBase):
 
 
 # ── Rider ─────────────────────────────────────────────────────────────────────
-
 class RiderCreate(BaseModel):
     name: str
     phone: str
     email: Optional[EmailStr] = None
-    password: str
+    password: Optional[str] = None
+    current_lat: Optional[float] = None
+    current_lon: Optional[float] = None
+    vehicle_type: Optional[str] = "bike"
     max_capacity: int = 4
 
 
