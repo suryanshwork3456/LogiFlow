@@ -101,12 +101,13 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from typing import List
-
+from app.schemas.schemas import RiderOut, RiderLocationUpdate, RiderStatusUpdate, RiderCreate
 from app.db.session import get_db
 from app.models.models import Rider, RiderStatus
 from app.schemas.schemas import RiderOut, RiderLocationUpdate, RiderStatusUpdate
 from app.core.auth import get_current_rider
-
+from passlib.context import CryptContext
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 # Note: Redis features bypassed temporarily for direct database testing.
 router = APIRouter(prefix="/riders", tags=["Riders"])
 
@@ -157,7 +158,16 @@ async def update_my_location(
         "lat": data.lat, 
         "lon": data.lon
     }
-
+@router.post("/", response_model=RiderOut, status_code=201)
+async def create_rider(data: RiderCreate, db: AsyncSession = Depends(get_db)):
+    data_dict = data.model_dump(exclude={"password", "email"})
+    data_dict["hashed_password"] = pwd_context.hash(data.password or "changeme123")
+    data_dict["email"] = data.email or f"{data_dict['phone']}@placeholder.com"  # ← add this
+    rider = Rider(**data_dict)
+    db.add(rider)
+    await db.commit()
+    await db.refresh(rider)
+    return rider
 
 @router.patch("/me/status", response_model=RiderOut)
 async def update_my_status(

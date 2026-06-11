@@ -29,6 +29,8 @@ logger = logging.getLogger(__name__)
 _MAX_CITY_DISTANCE_KM = 50.0
 
 
+
+
 @dataclass
 class ScoreBreakdown:
     rider_id: int
@@ -112,6 +114,13 @@ def compute_score(
         rider, market_lat, market_lon,
         batch.centroid_lat, batch.centroid_lon,
     )
+
+#     logger.info(
+#     "Rider %d | lat=%s lon=%s | d_rm=%.2f d_mc=%.2f total=%.2f | score=%.4f",
+#     rider.id, rider.current_lat, rider.current_lon,
+#     d_rm, d_mc, d_total, d_score
+# )
+    
     b_score  = _batch_score(len(batch.order_ids))
     r_score  = _rating_score(rider.avg_rating)
     bu_score = _busyness_score(active_orders, rider.max_capacity)

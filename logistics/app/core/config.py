@@ -25,9 +25,9 @@ class Settings(BaseSettings):
     MAX_BATCH_RADIUS_KM: float = 1.5
 
     # Efficiency Score Weights (must sum to 1.0)
-    WEIGHT_DISTANCE: float = 0.40
-    WEIGHT_BATCH: float = 0.30
-    WEIGHT_RATING: float = 0.20
+    WEIGHT_DISTANCE: float = 0.80
+    WEIGHT_BATCH: float = 0.05
+    WEIGHT_RATING: float = 0.05
     WEIGHT_BUSYNESS: float = 0.10
 
     class Config:

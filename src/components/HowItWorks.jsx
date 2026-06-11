@@ -27,7 +27,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="py-24 bg-[#FFFFFF]">
+    <section id = "solutions" className="py-24 bg-[#FFFFFF]">
       <div className="max-w-7xl mx-auto px-6 md:px-10 text-center">
         <h2 className="text-4xl md:text-5xl font-extrabold text-[#1A1A2E] mb-20" data-reveal="true">
           Seamless Integration in <span className="text-[#FF5722]">4 Steps</span>
