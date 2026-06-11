@@ -4,11 +4,12 @@ import { useState, useRef, useEffect } from "react";
 import Navbar from "../../components/rider/Navbar";
 import Sidebar from "../../components/rider/Sidebar";
 import Dashboard from "../../components/rider/dashboard/Dashboard";
+import RiderDeliveryRequest from "./RiderDeliveryRequest";
 import DeliveryStatus from "../../components/rider/delivery/DeliveryStatus";
 import DeliveryHistory from "../../components/rider/delivery/DeliveryHistory";
 import RouteMap from "../../components/rider/RouteMap";
 import NearbyRiders from "../../components/rider/NearbyRiders";
-import Ratings from "../../components/rider/Ratings";
+import RatingsPerformance from "../../components/rider/RatingsPerformance";
 
 function RiderDashboard() {
   const [activeTab, setActiveTab] = useState("Dashboard");
@@ -29,10 +30,11 @@ function RiderDashboard() {
   const renderContent = () => {
     switch (activeTab) {
       case "Delivery Status":   return <DeliveryStatus />;
+      case "Delivery Request":  return <RiderDeliveryRequest />;
       case "Route Map":         return <RouteMap />;
       case "Delivery History":  return <DeliveryHistory />;
       case "Nearby Riders":     return <NearbyRiders />;
-      case "Ratings":           return <Ratings />;
+      case "Ratings":           return <RatingsPerformance />;
       default:                  return <Dashboard />;
     }
   };
