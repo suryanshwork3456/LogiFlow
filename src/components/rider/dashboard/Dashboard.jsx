@@ -6,17 +6,37 @@ import { Package, CheckCircle2, Star,Navigation,
 import { AreaChart, Area, BarChart, Bar, XAxis,YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell,
 } from "recharts";
 
-import {weeklyData,deliveryHistory,statusData,
+import {
+  weeklyData,
+  deliveryHistory,
+  statusData,
 } from "../../../data/Riderdata.js";
 
+import { useEffect, useState } from "react";
+import API from "../../../api";
+
 function Dashboard() {
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const fetchOrders = async () => {
+    try {
+      const response = await API.get("/orders");
+      setOrders(response.data);
+    } catch (error) {
+      console.error("Failed to load orders", error);
+    }
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
       <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
         <StatCard icon={Package} label="Active Orders" value="12" sub="↑ 3 from yesterday" accent="#f97316" />
         <StatCard icon={CheckCircle2} label="Completed" value="58" sub="This week" accent="#22c55e" />
         <StatCard icon={Star} label="Rating" value="4.8" sub="50 reviews" accent="#eab308" />
-        <StatCard icon={Navigation} label="Distance Today" value="38 km" sub="142 km this week" accent="#3b82f6" />
+        <StatCard icon={Navigation} label="Distance Today" value="12.5 km" sub="142 km this week" accent="#3b82f6" />
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
@@ -61,7 +81,7 @@ function Dashboard() {
         <div style={{ background: "#fff", borderRadius: 16, padding: 24, boxShadow: "0 1px 4px rgba(0,0,0,0.07)" }}>
           <p style={{ margin: "0 0 16px", fontWeight: 700, fontSize: 15, color: "#111827" }}>Today's Deliveries</p>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {deliveryHistory.slice(0, 4).map((d) => (
+            {orders.slice(0, 4).map((d) => (
               <div key={d.id} style={{
                 display: "flex", alignItems: "center", gap: 12,
                 padding: "10px 14px", borderRadius: 12, background: "#fafafa",
@@ -74,12 +94,20 @@ function Dashboard() {
                   <Package size={16} color="#f97316" />
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: "#111827" }}>{d.id} · {d.customer}</p>
-                  <p style={{ margin: 0, fontSize: 11, color: "#9ca3af", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{d.address}</p>
+                  <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: "#111827" }}>Order #{d.id}</p>
+                  <p style={{ margin: 0, fontSize: 11, color: "#9ca3af", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{d.delivery_address}</p>
                 </div>
                 <div style={{ textAlign: "right", flexShrink: 0 }}>
-                  <StatusBadge status={d.status} />
-                  <p style={{ margin: "4px 0 0", fontSize: 11, color: "#9ca3af" }}>{d.time}</p>
+                  <StatusBadge
+                    status={
+                        d.status === "picked_up"
+                          ? "Picked Up"
+                          : d.status === "delivered"
+                          ? "Delivered"
+                          : "In Transit"
+                      }
+                    />
+                  <p style={{ margin: "4px 0 0", fontSize: 11, color: "#9ca3af" }}>{new Date(d.created_at).toLocaleDateString()}</p>
                 </div>
               </div>
             ))}
