@@ -224,7 +224,28 @@ with open(SCRIPT_DIR / "customers.json") as f:
 
 # print(f"Done: {len(rider_id_map)}/{len(riders_data.get('riders', []))}\n")
 
+# import random
 
+print("Seeding riders...")
+rider_id_map = {}
+
+for rider in riders_data.get("riders", []):
+    res = httpx.post(f"{BASE}/riders/", json={
+        "name":         rider["name"],
+        "phone":        rider["phone"],
+        "current_lat":  rider["lat"],
+        "current_lon":  rider["lon"],
+        "vehicle_type": rider["vehicle"],
+        "rating":       round(random.uniform(3.5, 5.0), 2),   # random rating 3.5–5.0
+        "total_deliveries": random.randint(10, 500),           # varied experience
+    })
+    if res.status_code in [200, 201]:
+        rider_id_map[rider["id"]] = res.json()["id"]
+        print(f"  ✓ {rider['name']}")
+    else:
+        print(f"  ✗ {rider['name']} → {res.status_code}: {res.text}")
+
+print(f"Done: {len(rider_id_map)}/{len(riders_data.get('riders', []))}\n")
 # # ── Step 3: Customers ─────────────────────────────────────────────────────────
 
 # print("Seeding customers...")
