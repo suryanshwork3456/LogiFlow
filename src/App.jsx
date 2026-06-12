@@ -20,14 +20,7 @@ import CompanyAlerts from './pages/company/CompanyAlerts.jsx';
 
 import Profile from "./pages/company/profile.jsx";
 
-import RiderMap from "./pages/rider/RiderMap.jsx";
-import RiderFeedback from "./pages/rider/RiderFeedback.jsx";
-import CompanyOperations from "./pages/company/CompanyOperations.jsx";
-import CompanyMap from "./pages/company/CompanyMap.jsx";
-import CompanyFeedback from "./pages/company/CompanyFeedback.jsx";
-import CompanyDeliveries from "./pages/company/CompanyDeliveries.jsx";
-import CompanyAnalytics from "./pages/company/CompanyAnalytics.jsx";
-import CompanyAlerts from "./pages/company/CompanyAlerts.jsx";
+
 // Public Components
 import Navbar from "./components/Navbar.jsx";
 import HeroSection from "./components/HeroSection.jsx";
@@ -52,6 +45,8 @@ import AIDelayPredictionPage from './pages/admin/AIDelayPrediction/index.jsx';
 import RouteOptimizationPage from './pages/admin/RouteOptimization/index.jsx';
 import SmartAlertsPage from "./pages/admin/SmartAlertsPage.jsx";
 import ShipmentFeedPage from "./pages/admin/ShipmentFeedPage.jsx";
+
+import AnalyticsPage from './pages/admin/Analytics/index.jsx';
 
 // Auth Pages
 import Login from "./pages/Login.jsx";
@@ -93,7 +88,7 @@ export default function App() {
       <Route path="/admin/route-optimization" element={<AdminLayout><RouteOptimizationPage /></AdminLayout>} />
       <Route path="/admin/smart-alerts" element={<AdminLayout><SmartAlertsPage /></AdminLayout>} />
       <Route path="/admin/shipment-feed" element={<AdminLayout><ShipmentFeedPage /></AdminLayout>} />
-
+      <Route path="/admin/analytics" element={<AdminLayout><AnalyticsPage /></AdminLayout>} />
       {/* Rider */}
       <Route path="/rider/dashboard" element={<RiderDashboard />} />
       <Route path="/rider/map" element={<RiderMap />} />
