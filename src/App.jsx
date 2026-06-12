@@ -10,6 +10,17 @@ import CompanyDashboard from './pages/company/CompanyDashboard.jsx';
 // Add these with your existing company imports
 import Profile from "./pages/company/profile.jsx";
 
+// Rider pages
+import RiderMap from "./pages/rider/RiderMap.jsx";
+import RiderFeedback from "./pages/rider/RiderFeedback.jsx";
+
+// Company pages
+import CompanyOperations from "./pages/company/CompanyOperations.jsx";
+import CompanyMap from "./pages/company/CompanyMap.jsx";
+import CompanyFeedback from "./pages/company/CompanyFeedback.jsx";
+import CompanyDeliveries from "./pages/company/CompanyDeliveries.jsx";
+import CompanyAnalytics from "./pages/company/CompanyAnalytics.jsx";
+import CompanyAlerts from "./pages/company/CompanyAlerts.jsx";
 
 // Public Components
 import Navbar from "./components/Navbar.jsx";
