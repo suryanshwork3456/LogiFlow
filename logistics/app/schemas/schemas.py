@@ -26,7 +26,6 @@ class SupermarketOut(SupermarketBase):
         from_attributes = True
 
 
-# ── Rider ─────────────────────────────────────────────────────────────────────
 class RiderCreate(BaseModel):
     name: str
     phone: str
@@ -36,6 +35,8 @@ class RiderCreate(BaseModel):
     current_lon: Optional[float] = None
     vehicle_type: Optional[str] = "bike"
     max_capacity: int = 4
+    avg_rating: float = 5.0        # ← add
+    total_deliveries: int = 0      # ← add
 
 
 class RiderLocationUpdate(BaseModel):
