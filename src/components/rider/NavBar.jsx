@@ -1,5 +1,12 @@
 import { Menu, Bell } from "lucide-react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 function Navbar({activeTab,profileOpen,setProfileOpen,profileRef,setSidebarOpen,}) {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+   // localStorage.removeItem("token"); 
+    navigate("/", { replace: true });
+  };
   return (
     <>
       <header style={{
@@ -96,7 +103,7 @@ function Navbar({activeTab,profileOpen,setProfileOpen,profileRef,setSidebarOpen,
                         onMouseOut={(e) => e.target.style.background = "none"}
                       >{item}</button>
                     ))}
-                    <div style={{ borderTop: "1px solid #f3f4f6", marginTop: 4, paddingTop: 4 }}>
+                    <div onClick={handleLogout} style={{ borderTop: "1px solid #f3f4f6", marginTop: 4, paddingTop: 4 }}>
                       <button style={{
                         width: "100%", textAlign: "left", padding: "10px 12px",
                         fontSize: 13, color: "#ef4444", background: "none", border: "none",
