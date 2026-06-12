@@ -1,287 +1,174 @@
 // filepath: src/components/Navbar.jsx
-// import React, { useState } from 'react';
-// import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import { Menu, X } from 'lucide-react';
-// import Modal from './Modal.jsx';
-// // import { useNavigate } from 'react-router-dom';
 
-// export default function Navbar() {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const location = useLocation();
-//   const navigate = useNavigate();
-
-//   const [modalOpen, setModalOpen] = useState(false);
-//   const [modalType, setModalType] = useState('early-access');
-
-//   const openAppModal = (type) => {
-//     setIsOpen(false);
-//     setModalType(type);
-//     setModalOpen(true);
-//   };
-
-//   const scrollToAICopilot = () => {
-//     setIsOpen(false);
-//     if (location.pathname === '/') {
-//       document.getElementById('ai-copilot')?.scrollIntoView({ behavior: 'smooth' });
-//     } else {
-//       navigate('/');
-//       setTimeout(() => {
-//         document.getElementById('ai-copilot')?.scrollIntoView({ behavior: 'smooth' });
-//       }, 150);
-//     }
-//   };
-
-//   const scrollToPricing = () => {
-//     setIsOpen(false);
-//     if (location.pathname === '/') {
-//       document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
-//     } else {
-//       navigate('/');
-//       setTimeout(() => {
-//         document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
-//       }, 150);
-//     }
-//   };
-
-//   const navItemClass = (path) => {
-//     if (location.pathname === path) {
-//       return "text-[#FF5722] border-b-2 border-[#FF5722] pb-1 cursor-pointer";
-//     }
-//     return "text-[#555F6D] hover:text-[#FF5722] transition-colors pb-1 cursor-pointer";
-//   };
-
-//   return (
-//     <nav id="navbar" className="fixed top-0 w-full z-50 bg-[#FFFFFF] transition-all duration-300 py-6 px-6 md:px-10 border-b border-[#E0E0E0]">
-//       <div className="max-w-7xl mx-auto flex justify-between items-center">
-//         <Link to="/" className="text-2xl md:text-3xl font-bold tracking-tighter text-[#1A1A2E]">
-//           Logi<span className="text-[#FF5722]">Flow</span>
-//         </Link>
-        
-//         <div className="hidden md:flex gap-8 items-center font-semibold text-sm uppercase tracking-wide">
-//           <Link to="/" className={navItemClass('/')}>HOME</Link>
-//           <Link to="/control-tower" className={navItemClass('/control-tower')}>SOLUTIONS</Link>
-//           <Link to="/live-tracking" className={navItemClass('/live-tracking')}>FLEET</Link>
-//           <button onClick={scrollToAICopilot} className="text-[#555F6D] hover:text-[#FF5722] transition-colors pb-1 uppercase font-semibold text-sm uppercase tracking-wide cursor-pointer">AI COPILOT</button>
-//           <button onClick={scrollToPricing} className="text-[#555F6D] hover:text-[#FF5722] transition-colors pb-1 uppercase font-semibold text-sm uppercase tracking-wide cursor-pointer">PRICING</button>
-//         </div>
-        
-//         <div className="hidden md:flex items-center gap-4 text-sm font-bold">
-//           <Link to="/shipment-feed" className="px-6 py-2 border-2 border-[#E0E0E0] text-[#555F6D] rounded-lg hover:border-[#FF5722] hover:text-[#FF5722] transition-all">Track Shipment</Link>
-//           <button onClick={() => openAppModal('early-access')} className="px-6 py-2 bg-[#FF5722] text-[#FFFFFF] rounded-lg hover:bg-[#FF7043] transition-all">Get Started</button>
-//         </div>
-
-//         <button className="md:hidden text-[#1A1A2E]" onClick={() => setIsOpen(!isOpen)}>
-//           {isOpen ? <X size={28} /> : <Menu size={28} />}
-//         </button>
-//       </div>
-
-//       {isOpen && (
-//         <div className="md:hidden absolute top-full left-0 w-full bg-[#FFFFFF] shadow-lg border-t border-[#E0E0E0] p-6 flex flex-col gap-6 font-semibold uppercase tracking-wide">
-//           <Link to="/" className={`${navItemClass('/')} border-b border-[#E0E0E0]`} onClick={() => setIsOpen(false)}>HOME</Link>
-//           <Link to="/control-tower" className={`${navItemClass('/control-tower')} border-b border-[#E0E0E0]`} onClick={() => setIsOpen(false)}>SOLUTIONS</Link>
-//           <Link to="/live-tracking" className={`${navItemClass('/live-tracking')} border-b border-[#E0E0E0]`} onClick={() => setIsOpen(false)}>FLEET</Link>
-//           <button onClick={scrollToAICopilot} className="text-left text-[#555F6D] hover:text-[#FF5722] transition-colors pb-2 border-b border-[#E0E0E0] uppercase font-semibold">AI COPILOT</button>
-//           <button onClick={scrollToPricing} className="text-left text-[#555F6D] hover:text-[#FF5722] transition-colors pb-2 border-b border-[#E0E0E0] uppercase font-semibold">PRICING</button>
-//           <div className="flex flex-col gap-4 mt-4">
-//             <Link to="/shipment-feed" className="py-3 w-full border-2 border-[#E0E0E0] text-[#555F6D] text-center rounded-lg hover:border-[#FF5722] hover:text-[#FF5722]" onClick={() => setIsOpen(false)}>Track Shipment</Link>
-//             <button onClick={() => openAppModal('early-access')} className="py-3 w-full bg-[#FF5722] text-[#FFFFFF] rounded-lg text-center">Get Started</button>
-//           </div>
-//         </div>
-//       )}
-//       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} type={modalType} />
-//     </nav>
-//   );
-// }
-
-
-
-
-// import React, { useState } from 'react';
-// import { Link, useLocation, useNavigate } from 'react-router-dom';
-// import { Menu, X } from 'lucide-react';
-// import Modal from './Modal.jsx';
-
-// export default function Navbar() {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const location = useLocation();
-//   const navigate = useNavigate();
-
-//   const [modalOpen, setModalOpen] = useState(false);
-//   const [modalType, setModalType] = useState('early-access');
-
-//   const openAppModal = (type) => {
-//     setIsOpen(false);
-//     setModalType(type);
-//     setModalOpen(true);
-//   };
-
-//   const scrollToAICopilot = () => {
-//     setIsOpen(false);
-//     if (location.pathname === '/') {
-//       document.getElementById('ai-copilot')?.scrollIntoView({ behavior: 'smooth' });
-//     } else {
-//       navigate('/');
-//       setTimeout(() => {
-//         document.getElementById('ai-copilot')?.scrollIntoView({ behavior: 'smooth' });
-//       }, 150);
-//     }
-//   };
-
-//   const scrollToPricing = () => {
-//     setIsOpen(false);
-//     if (location.pathname === '/') {
-//       document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
-//     } else {
-//       navigate('/');
-//       setTimeout(() => {
-//         document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
-//       }, 150);
-//     }
-//   };
-
-//   const navItemClass = (path) => {
-//     if (location.pathname === path) {
-//       return "text-[#FF5722] border-b-2 border-[#FF5722] pb-1 cursor-pointer";
-//     }
-//     return "text-[#555F6D] hover:text-[#FF5722] transition-colors pb-1 cursor-pointer";
-//   };
-
-//   return (
-//     <nav id="navbar" className="fixed top-0 w-full z-50 bg-[#FFFFFF] transition-all duration-300 py-6 px-6 md:px-10 border-b border-[#E0E0E0]">
-//       <div className="max-w-7xl mx-auto flex justify-between items-center">
-//         <Link to="/" className="text-2xl md:text-3xl font-bold tracking-tighter text-[#1A1A2E]">
-//           Logi<span className="text-[#FF5722]">Flow</span>
-//         </Link>
-        
-//         <div className="hidden md:flex gap-8 items-center font-semibold text-sm uppercase tracking-wide">
-//           <Link to="/" className={navItemClass('/')}>HOME</Link>
-//           <Link to="/control-tower" className={navItemClass('/control-tower')}>SOLUTIONS</Link>
-//           <Link to="/live-tracking" className={navItemClass('/live-tracking')}>FLEET</Link>
-//           <button onClick={scrollToAICopilot} className="text-[#555F6D] hover:text-[#FF5722] transition-colors pb-1 uppercase font-semibold text-sm tracking-wide cursor-pointer">AI COPILOT</button>
-//           <button onClick={scrollToPricing} className="text-[#555F6D] hover:text-[#FF5722] transition-colors pb-1 uppercase font-semibold text-sm tracking-wide cursor-pointer">PRICING</button>
-//         </div>
-        
-//         <div className="hidden md:flex items-center gap-4 text-sm font-bold">
-//           <Link to="/shipment-feed" className="px-6 py-2 border-2 border-[#E0E0E0] text-[#555F6D] rounded-lg hover:border-[#FF5722] hover:text-[#FF5722] transition-all">Track Shipment</Link>
-//           {/* Changed onClick to route to /login */}
-//           <button onClick={() => navigate('/login')} className="px-6 py-2 bg-[#FF5722] text-[#FFFFFF] rounded-lg hover:bg-[#FF7043] transition-all">Get Started</button>
-//         </div>
-
-//         <button className="md:hidden text-[#1A1A2E]" onClick={() => setIsOpen(!isOpen)}>
-//           {isOpen ? <X size={28} /> : <Menu size={28} />}
-//         </button>
-//       </div>
-
-//       {isOpen && (
-//         <div className="md:hidden absolute top-full left-0 w-full bg-[#FFFFFF] shadow-lg border-t border-[#E0E0E0] p-6 flex flex-col gap-6 font-semibold uppercase tracking-wide">
-//           <Link to="/" className={`${navItemClass('/')} border-b border-[#E0E0E0]`} onClick={() => setIsOpen(false)}>HOME</Link>
-//           <Link to="/control-tower" className={`${navItemClass('/control-tower')} border-b border-[#E0E0E0]`} onClick={() => setIsOpen(false)}>SOLUTIONS</Link>
-//           <Link to="/live-tracking" className={`${navItemClass('/live-tracking')} border-b border-[#E0E0E0]`} onClick={() => setIsOpen(false)}>FLEET</Link>
-//           <button onClick={scrollToAICopilot} className="text-left text-[#555F6D] hover:text-[#FF5722] transition-colors pb-2 border-b border-[#E0E0E0] uppercase font-semibold">AI COPILOT</button>
-//           <button onClick={scrollToPricing} className="text-left text-[#555F6D] hover:text-[#FF5722] transition-colors pb-2 border-b border-[#E0E0E0] uppercase font-semibold">PRICING</button>
-//           <div className="flex flex-col gap-4 mt-4">
-//             <Link to="/shipment-feed" className="py-3 w-full border-2 border-[#E0E0E0] text-[#555F6D] text-center rounded-lg hover:border-[#FF5722] hover:text-[#FF5722]" onClick={() => setIsOpen(false)}>Track Shipment</Link>
-//             {/* Changed mobile onClick to close menu and route to /login */}
-//             <button 
-//               onClick={() => {
-//                 setIsOpen(false);
-//                 navigate('/login');
-//               }} 
-//               className="py-3 w-full bg-[#FF5722] text-[#FFFFFF] rounded-lg text-center"
-//             >
-//               Get Started
-//             </button>
-//           </div>
-//         </div>
-//       )}
-//       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} type={modalType} />
-//     </nav>
-//   );
-// }
-
-
-import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
   const location = useLocation();
   const navigate = useNavigate();
 
-  const scrollToAICopilot = () => {
+  const scrollToSection = (sectionId) => {
     setIsOpen(false);
-    if (location.pathname === '/') {
-      document.getElementById('ai-copilot')?.scrollIntoView({ behavior: 'smooth' });
+    setActiveSection(sectionId);
+
+    if (location.pathname === "/") {
+      if (sectionId === "home") {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      } else {
+        document.getElementById(sectionId)?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     } else {
-      navigate('/');
+      navigate("/");
+
       setTimeout(() => {
-        document.getElementById('ai-copilot')?.scrollIntoView({ behavior: 'smooth' });
+        if (sectionId === "home") {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        } else {
+          document.getElementById(sectionId)?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
       }, 150);
     }
   };
 
-  const scrollToPricing = () => {
-    setIsOpen(false);
-    if (location.pathname === '/') {
-      document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate('/');
-      setTimeout(() => {
-        document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
-      }, 150);
-    }
-  };
-
-  const navItemClass = (path) => {
-    if (location.pathname === path) {
-      return "text-[#FF5722] border-b-2 border-[#FF5722] pb-1 cursor-pointer";
-    }
-    return "text-[#555F6D] hover:text-[#FF5722] transition-colors pb-1 cursor-pointer";
-  };
+  const navButtonClass = (section) =>
+    activeSection === section
+      ? "text-[#FF5722] border-b-2 border-[#FF5722] pb-1 transition-all"
+      : "text-[#555F6D] hover:text-[#FF5722] transition-colors pb-1";
 
   return (
-    <nav id="navbar" className="fixed top-0 w-full z-50 bg-[#FFFFFF] transition-all duration-300 py-6 px-6 md:px-10 border-b border-[#E0E0E0]">
+    <nav
+      id="navbar"
+      className="fixed top-0 w-full z-50 bg-[#FFFFFF] transition-all duration-300 py-6 px-6 md:px-10 border-b border-[#E0E0E0]"
+    >
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link to="/" className="text-2xl md:text-3xl font-bold tracking-tighter text-[#1A1A2E]">
+        {/* Logo */}
+        <button
+          onClick={() => scrollToSection("home")}
+          className="text-2xl md:text-3xl font-bold tracking-tighter text-[#1A1A2E]"
+        >
           Logi<span className="text-[#FF5722]">Flow</span>
-        </Link>
-        
+        </button>
+
+        {/* Desktop Navigation */}
         <div className="hidden md:flex gap-8 items-center font-semibold text-sm uppercase tracking-wide">
-          <Link to="/" className={navItemClass('/')}>HOME</Link>
-          <Link to="/control-tower" className={navItemClass('/control-tower')}>SOLUTIONS</Link>
-          <Link to="/live-tracking" className={navItemClass('/live-tracking')}>FLEET</Link>
-          <button onClick={scrollToAICopilot} className="text-[#555F6D] hover:text-[#FF5722] transition-colors pb-1 uppercase font-semibold text-sm tracking-wide cursor-pointer">AI COPILOT</button>
-          <button onClick={scrollToPricing} className="text-[#555F6D] hover:text-[#FF5722] transition-colors pb-1 uppercase font-semibold text-sm tracking-wide cursor-pointer">PRICING</button>
-        </div>
-        
-        <div className="hidden md:flex items-center gap-4 text-sm font-bold">
-          <Link to="/shipment-feed" className="px-6 py-2 border-2 border-[#E0E0E0] text-[#555F6D] rounded-lg hover:border-[#FF5722] hover:text-[#FF5722] transition-all">Track Shipment</Link>
-          <button onClick={() => navigate('/login')} className="px-6 py-2 bg-[#FF5722] text-[#FFFFFF] rounded-lg hover:bg-[#FF7043] transition-all">Get Started</button>
+          <button
+            onClick={() => scrollToSection("home")}
+            className={navButtonClass("home")}
+          >
+            HOME
+          </button>
+
+          <button
+            onClick={() => scrollToSection("solutions")}
+            className={navButtonClass("solutions")}
+          >
+            SOLUTIONS
+          </button>
+
+          <button
+            onClick={() => scrollToSection("fleet")}
+            className={navButtonClass("fleet")}
+          >
+            FLEET
+          </button>
+
+          <button
+            onClick={() => scrollToSection("ai-copilot")}
+            className={navButtonClass("ai-copilot")}
+          >
+            AI COPILOT
+          </button>
+
+          <button
+            onClick={() => scrollToSection("why-logiflow")}
+            className={navButtonClass("why-logiflow")}
+          >
+            WHY LOGIFLOW
+          </button>
         </div>
 
-        <button className="md:hidden text-[#1A1A2E]" onClick={() => setIsOpen(!isOpen)}>
+        {/* Desktop Actions */}
+        <div className="hidden md:flex items-center gap-4 text-sm font-bold">
+          <button
+            onClick={() => navigate("/login")}
+            className="px-6 py-2 bg-[#FF5722] text-[#FFFFFF] rounded-lg hover:bg-[#FF7043] transition-all"
+          >
+            Sign in
+          </button>
+        </div>
+
+        {/* Mobile Toggle */}
+        <button
+          className="md:hidden text-[#1A1A2E]"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
+      {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-[#FFFFFF] shadow-lg border-t border-[#E0E0E0] p-6 flex flex-col gap-6 font-semibold uppercase tracking-wide">
-          <Link to="/" className={`${navItemClass('/')} border-b border-[#E0E0E0]`} onClick={() => setIsOpen(false)}>HOME</Link>
-          <Link to="/control-tower" className={`${navItemClass('/control-tower')} border-b border-[#E0E0E0]`} onClick={() => setIsOpen(false)}>SOLUTIONS</Link>
-          <Link to="/live-tracking" className={`${navItemClass('/live-tracking')} border-b border-[#E0E0E0]`} onClick={() => setIsOpen(false)}>FLEET</Link>
-          <button onClick={scrollToAICopilot} className="text-left text-[#555F6D] hover:text-[#FF5722] transition-colors pb-2 border-b border-[#E0E0E0] uppercase font-semibold">AI COPILOT</button>
-          <button onClick={scrollToPricing} className="text-left text-[#555F6D] hover:text-[#FF5722] transition-colors pb-2 border-b border-[#E0E0E0] uppercase font-semibold">PRICING</button>
+          <button
+            onClick={() => scrollToSection("home")}
+            className="text-left text-[#555F6D] hover:text-[#FF5722] transition-colors pb-2 border-b border-[#E0E0E0]"
+          >
+            HOME
+          </button>
+
+          <button
+            onClick={() => scrollToSection("solutions")}
+            className="text-left text-[#555F6D] hover:text-[#FF5722] transition-colors pb-2 border-b border-[#E0E0E0]"
+          >
+            SOLUTIONS
+          </button>
+
+          <button
+            onClick={() => scrollToSection("fleet")}
+            className="text-left text-[#555F6D] hover:text-[#FF5722] transition-colors pb-2 border-b border-[#E0E0E0]"
+          >
+            FLEET
+          </button>
+
+          <button
+            onClick={() => scrollToSection("ai-copilot")}
+            className="text-left text-[#555F6D] hover:text-[#FF5722] transition-colors pb-2 border-b border-[#E0E0E0]"
+          >
+            AI COPILOT
+          </button>
+
+          <button
+            onClick={() => scrollToSection("why-logiflow")}
+            className="text-left text-[#555F6D] hover:text-[#FF5722] transition-colors pb-2 border-b border-[#E0E0E0]"
+          >
+            WHY LOGIFLOW
+          </button>
+
           <div className="flex flex-col gap-4 mt-4">
-            <Link to="/shipment-feed" className="py-3 w-full border-2 border-[#E0E0E0] text-[#555F6D] text-center rounded-lg hover:border-[#FF5722] hover:text-[#FF5722]" onClick={() => setIsOpen(false)}>Track Shipment</Link>
-            <button 
+            <button
               onClick={() => {
                 setIsOpen(false);
-                navigate('/login');
-              }} 
+                navigate("/login");
+              }}
               className="py-3 w-full bg-[#FF5722] text-[#FFFFFF] rounded-lg text-center"
             >
-              Get Started
+              Sign in
             </button>
           </div>
         </div>

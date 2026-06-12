@@ -25,7 +25,6 @@ import FeaturesGrid from "./components/FeaturesGrid.jsx";
 import AICopilotShowcase from "./components/AICopilotShowcase.jsx";
 import HowItWorks from "./components/HowItWorks.jsx";
 import Testimonials from "./components/Testimonials.jsx";
-import CTABand from "./components/CTABand.jsx";
 import Footer from "./components/Footer.jsx";
 import useScrollReveal from "./hooks/useScrollReveal.js";
 
@@ -51,15 +50,35 @@ function HomePage() {
   return (
     <div className="min-h-screen flex flex-col pt-20">
       <Navbar />
+
       <main className="flex-grow">
+        {/* Home */}
         <HeroSection />
-        <StatsBar />
-        <FeaturesGrid />
-        <AICopilotShowcase />
-        <HowItWorks />
+
+        {/* Solutions */}
+        <section id="solutions">
+          <StatsBar />
+        </section>
+
+        {/* Fleet */}
+        <section id="fleet">
+          <FeaturesGrid />
+        </section>
+
+        {/* AI Copilot */}
+        <section id="ai-copilot">
+          <AICopilotShowcase />
+        </section>
+
+        {/* Why LogiFlow */}
+        <section id="why-logiflow">
+          <HowItWorks />
+        </section>
+
+        {/* Testimonials */}
         <Testimonials />
-        <CTABand />
       </main>
+
       <Footer />
     </div>
   );
@@ -74,13 +93,68 @@ export default function App() {
       <Route path="/register" element={<Register />} />
 
       {/* Admin */}
-      <Route path="/admin" element={<AdminLayout><DashboardPage /></AdminLayout>} />
-      <Route path="/admin/control-tower" element={<AdminLayout><ControlTowerPage /></AdminLayout>} />
-      <Route path="/admin/live-tracking" element={<AdminLayout><LiveTrackingPage /></AdminLayout>} />
-      <Route path="/admin/ai-prediction" element={<AdminLayout><AIDelayPredictionPage /></AdminLayout>} />
-      <Route path="/admin/route-optimization" element={<AdminLayout><RouteOptimizationPage /></AdminLayout>} />
-      <Route path="/admin/smart-alerts" element={<AdminLayout><SmartAlertsPage /></AdminLayout>} />
-      <Route path="/admin/shipment-feed" element={<AdminLayout><ShipmentFeedPage /></AdminLayout>} />
+      <Route
+        path="/admin"
+        element={
+          <AdminLayout>
+            <DashboardPage />
+          </AdminLayout>
+        }
+      />
+
+      <Route
+        path="/admin/control-tower"
+        element={
+          <AdminLayout>
+            <ControlTowerPage />
+          </AdminLayout>
+        }
+      />
+
+      <Route
+        path="/admin/live-tracking"
+        element={
+          <AdminLayout>
+            <LiveTrackingPage />
+          </AdminLayout>
+        }
+      />
+
+      <Route
+        path="/admin/ai-prediction"
+        element={
+          <AdminLayout>
+            <AIDelayPredictionPage />
+          </AdminLayout>
+        }
+      />
+
+      <Route
+        path="/admin/route-optimization"
+        element={
+          <AdminLayout>
+            <RouteOptimizationPage />
+          </AdminLayout>
+        }
+      />
+
+      <Route
+        path="/admin/smart-alerts"
+        element={
+          <AdminLayout>
+            <SmartAlertsPage />
+          </AdminLayout>
+        }
+      />
+
+      <Route
+        path="/admin/shipment-feed"
+        element={
+          <AdminLayout>
+            <ShipmentFeedPage />
+          </AdminLayout>
+        }
+      />
 
       {/* Rider */}
       <Route path="/rider/dashboard" element={<RiderDashboard />} />
@@ -88,13 +162,40 @@ export default function App() {
       <Route path="/rider/feedback" element={<RiderFeedback />} />
 
       {/* Company */}
-      <Route path="/company/dashboard" element={<CompanyDashboard />} />
-      <Route path="/company/operations" element={<CompanyOperations />} />
-      <Route path="/company/map" element={<CompanyMap />} />
-      <Route path="/company/feedback" element={<CompanyFeedback />} />
-      <Route path="/company/deliveries" element={<CompanyDeliveries />} />
-      <Route path="/company/analytics" element={<CompanyAnalytics />} />
-      <Route path="/company/alerts" element={<CompanyAlerts />} />
+      <Route
+        path="/company/dashboard"
+        element={<CompanyDashboard />}
+      />
+
+      <Route
+        path="/company/operations"
+        element={<CompanyOperations />}
+      />
+
+      <Route
+        path="/company/map"
+        element={<CompanyMap />}
+      />
+
+      <Route
+        path="/company/feedback"
+        element={<CompanyFeedback />}
+      />
+
+      <Route
+        path="/company/deliveries"
+        element={<CompanyDeliveries />}
+      />
+
+      <Route
+        path="/company/analytics"
+        element={<CompanyAnalytics />}
+      />
+
+      <Route
+        path="/company/alerts"
+        element={<CompanyAlerts />}
+      />
 
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />

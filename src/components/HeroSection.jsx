@@ -35,7 +35,7 @@ export default function HeroSection() {
           
           <div className="flex flex-wrap gap-4 mb-14">
             <button onClick={() => openModal('early-access')} className="px-8 py-4 bg-[#FF5722] text-[#FFFFFF] font-bold rounded-lg shadow-xl hover:bg-[#FF7043] transition-all flex items-center gap-2 text-lg">
-              Get Started Free <ArrowRight size={20} />
+              Your Logistic hub <ArrowRight size={20} />
             </button>
             <button onClick={() => openModal('demo')} className="px-8 py-4 border-2 border-[#E0E0E0] text-[#1A1A2E] font-bold rounded-lg hover:border-[#1A1A2E] transition-all flex items-center gap-2 text-lg bg-[#FFFFFF]">
               <PlayCircle size={20} /> Watch Live Demo
