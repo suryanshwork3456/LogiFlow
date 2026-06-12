@@ -1,15 +1,37 @@
 // filepath: src/components/HeroSection.jsx
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { ArrowRight, PlayCircle, MapPin } from 'lucide-react';
 import Modal from './Modal.jsx';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
 
 export default function HeroSection() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState('early-access');
+  const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
+  const videoRef = useRef(null);
 
   const openModal = (type) => {
     setModalType(type);
     setModalOpen(true);
+  };
+  const openDemoModal = () => {
+    setIsDemoOpen(true);
+    // thoda delay taki modal render ho jaye phir play call ho
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.play();
+      }
+    }, 0);
+  };
+  const closeDemoModal = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0; // dubara se start ke liye
+    }
+    setIsDemoOpen(false);
   };
 
   return (
@@ -34,12 +56,45 @@ export default function HeroSection() {
           </p>
           
           <div className="flex flex-wrap gap-4 mb-14">
-            <button onClick={() => openModal('early-access')} className="px-8 py-4 bg-[#FF5722] text-[#FFFFFF] font-bold rounded-lg shadow-xl hover:bg-[#FF7043] transition-all flex items-center gap-2 text-lg">
+            <button onClick={() => {
+                setIsOpen(false);
+                navigate('/login');}}
+                className="px-8 py-4 bg-[#FF5722] text-[#FFFFFF] font-bold rounded-lg shadow-xl hover:bg-[#FF7043] transition-all flex items-center gap-2 text-lg">
               Get Started Free <ArrowRight size={20} />
             </button>
-            <button onClick={() => openModal('demo')} className="px-8 py-4 border-2 border-[#E0E0E0] text-[#1A1A2E] font-bold rounded-lg hover:border-[#1A1A2E] transition-all flex items-center gap-2 text-lg bg-[#FFFFFF]">
+            <button onClick={openDemoModal} className="px-8 py-4 border-2 border-[#E0E0E0] text-[#1A1A2E] font-bold rounded-lg hover:border-[#1A1A2E] transition-all flex items-center gap-2 text-lg bg-[#FFFFFF]">
               <PlayCircle size={20} /> Watch Live Demo
             </button>
+             {isDemoOpen && (
+              <div
+             className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
+              onClick={closeDemoModal}
+              >
+             <div
+              className="bg-white rounded-xl p-4 max-w-xl w-full"
+             onClick={(e) => e.stopPropagation()} 
+             >
+              <div className="flex justify-between items-center mb-2">
+               <h2 className="font-semibold text-lg">Demo Video</h2>
+              <button onClick={closeDemoModal} className="text-sm text-gray-500">
+                Close
+              </button>
+            </div>
+
+            <video
+              ref={videoRef}
+              controls
+              className="w-full rounded-lg"
+            >
+              <source
+                src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      )}
           </div>
           
           <div className="flex flex-wrap items-center gap-6 border-t border-[#E0E0E0] pt-8">
