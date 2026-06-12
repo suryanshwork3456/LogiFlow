@@ -5,19 +5,9 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import RiderMap from './pages/rider/RiderMap.jsx';
-import RiderFeedback from './pages/rider/RiderFeedback.jsx';
-
 import RiderDashboard from './pages/rider/RiderDashboard.jsx';
 import CompanyDashboard from './pages/company/CompanyDashboard.jsx';
 // Add these with your existing company imports
-import CompanyOperations from './pages/company/CompanyOperations.jsx';
-import CompanyMap from './pages/company/CompanyMap.jsx';
-import CompanyFeedback from './pages/company/CompanyFeedback.jsx';
-import CompanyDeliveries from './pages/company/CompanyDeliveries.jsx';
-import CompanyAnalytics from './pages/company/CompanyAnalytics.jsx';
-import CompanyAlerts from './pages/company/CompanyAlerts.jsx';
-
 import Profile from "./pages/company/profile.jsx";
 
 import RiderMap from "./pages/rider/RiderMap.jsx";
