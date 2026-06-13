@@ -251,7 +251,7 @@ const roles = [
     icon: "🏢",
     color: "border-[#4CAF50] bg-[#4CAF50]/10",
     activeText: "text-[#4CAF50]",
-    redirect: "/company/dashboard",
+    redirect: "/company/profile",
   },
 ];
 
