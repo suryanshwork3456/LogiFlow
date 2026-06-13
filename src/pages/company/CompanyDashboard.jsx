@@ -15,6 +15,8 @@ import {
   Cell,
 } from "recharts";
 
+
+
 export default function CompanyDashboard() {
   const navigate = useNavigate();
 

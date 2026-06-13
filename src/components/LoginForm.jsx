@@ -217,14 +217,52 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedRole) { setError("Please select a role first"); return; }
     if (!formData.email || !formData.password) { setError("Please fill all fields"); return; }
     setError("");
-    const role = roles.find(r => r.id === selectedRole);
-    navigate(role.redirect);
+      if (selectedRole === "company") {
+
+        const res = await fetch(
+          "http://localhost:8000/api/companies/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              email: formData.email,
+              password: formData.password,
+            }),
+          }
+        );
+        const data = await res.json();
+        if (!res.ok) {
+          setError(data.detail || "Login failed");
+          return;
+        }
+        localStorage.setItem(
+          "company",
+          JSON.stringify(data)
+        );
+
+        if (data.is_setup_complete) {
+          navigate("/company/dashboard");
+        } else {
+          navigate("/company/profile");
+        }
+
+        return;
+      }
+      const role = roles.find(
+      (r) => r.id === selectedRole
+      );
+      if (role) {
+        navigate(role.redirect);
+      }
   };
+
 
   return (
     <div className="w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl shadow-black/50 grid md:grid-cols-2 border border-slate-800">

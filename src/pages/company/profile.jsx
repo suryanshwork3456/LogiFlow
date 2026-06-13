@@ -22,18 +22,65 @@ function profile({ onComplete }) {
     reader.readAsDataURL(file);
   };
 
-  const submit = () => {
+  const submit = async () => {
     const e = {};
-    if (!form.name.trim()) e.name = "Company name is required";
+
+    if (!form.name.trim())
+      e.name = "Company name is required";
+
     if (!form.emergencyContact.trim())
       e.emergencyContact = "Emergency contact is required";
-    if (!form.whyChooseUs.trim()) e.whyChooseUs = "Please fill this field";
+
+    if (!form.whyChooseUs.trim())
+      e.whyChooseUs = "Please fill this field";
+
     if (Object.keys(e).length) {
       setErrors(e);
       return;
     }
-     if (onComplete) onComplete(form);
-     navigate("/company/dashboard");
+
+    try {
+      const company = JSON.parse(
+        localStorage.getItem("company")
+      );
+
+      const response = await fetch(
+        `http://localhost:8000/api/companies/${company.company_id}/setup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            company_name: form.name,
+            emergency_contact: form.emergencyContact,
+            description: form.whyChooseUs,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.detail || "Failed to save company");
+        return;
+      }
+
+      localStorage.setItem(
+        "company",
+        JSON.stringify({
+          ...company,
+          company_name: data.company_name,
+          is_setup_complete: true,
+        })
+      );
+
+      navigate("/company/dashboard");
+
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong");
+    }
   };
 
   return (

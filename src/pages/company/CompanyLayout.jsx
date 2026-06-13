@@ -2,11 +2,14 @@ import { useNavigate, useLocation } from "react-router-dom";
 import CompanyHeader from "./CompanyHeader";
 import { useState } from "react";
 
+
 export default function CompanyLayout({ title, children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(true); // ✅ yahan state
-
+  const company = JSON.parse(
+  localStorage.getItem("company")
+  );
   const menuItems = [
     { name: "Dashboard", path: "/company/dashboard", icon: "🏢" },
     { name: "Operations", path: "/company/operations", icon: "🎯" },
@@ -71,7 +74,7 @@ export default function CompanyLayout({ title, children }) {
                 <p className="text-xs text-gray-400 uppercase tracking-wider">
                   Current Company
                 </p>
-                <h3 className="font-semibold mt-2">ABC Logistics</h3>
+                <h3 className="font-semibold mt-2">{company?.company_name || "ABC Logistics"}</h3>
                 <p className="text-sm text-green-400 mt-1">
                   ● System Operational
                 </p>

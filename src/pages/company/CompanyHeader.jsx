@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router-dom";
-
+  const company = JSON.parse(
+  localStorage.getItem("company")
+  );
+  const companyName =
+  company?.company_name || "Company";
 export default function CompanyHeader({ title, sidebarOpen, onToggleSidebar }) {
   const today = new Date().toDateString();
   const navigate = useNavigate();
@@ -20,7 +24,7 @@ export default function CompanyHeader({ title, sidebarOpen, onToggleSidebar }) {
             {title}
           </h1>
           <p className="text-gray-500">
-            ABC Logistics • {today}
+            {companyName} • {today}
           </p>
         </div>
       </div>
