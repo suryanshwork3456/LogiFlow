@@ -15,6 +15,8 @@ from app.db.session import engine
 from app.models.models import Base
 # from app.utils.websocket_manager import redis_event_listener
 
+from app.api.routes.company import router as company_router
+
 # ── Routes ────────────────────────────────────────────────────────────────────
 from app.api.routes.auth         import router as auth_router
 from app.api.routes.orders       import router as orders_router
@@ -23,7 +25,6 @@ from app.api.routes.supermarkets import router as supermarkets_router
 from app.api.routes.ratings      import router as ratings_router
 from app.api.routes.websockets   import router as ws_router
 from app.api.routes.customers    import router as customers_router
-
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -81,8 +82,8 @@ app.include_router(riders_router,       prefix="/api")
 app.include_router(supermarkets_router, prefix="/api")
 app.include_router(ratings_router,      prefix="/api")
 app.include_router(ws_router)           # WebSocket — no /api prefix
-
 app.include_router(customers_router, prefix="/api")
+app.include_router(company_router, prefix="/api")
 
 @app.get("/health")
 async def health_check():

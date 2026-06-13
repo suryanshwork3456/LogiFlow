@@ -54,8 +54,8 @@ class Rider(Base):
     location_updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
     status = Column(
-        Enum(RiderStatus, native_enum=False), 
-        default=RiderStatus.idle, 
+        ENUM(RiderStatus, name="riderstatus"),
+        default=RiderStatus.idle,
         nullable=False
     )
     max_capacity    = Column(Integer, default=4)   # max simultaneous orders
@@ -138,3 +138,5 @@ class RiderRating(Base):
 
     rider       = relationship("Rider", back_populates="ratings")
     order       = relationship("Order", back_populates="rating")
+    
+from app.models.company import Company
