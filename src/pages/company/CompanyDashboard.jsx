@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import CompanyLayout from "./CompanyLayout";
+import { isDemoCompany } from "../../utils/companyHelper";
 
 import {
   ResponsiveContainer,
@@ -19,6 +20,7 @@ import {
 
 export default function CompanyDashboard() {
   const navigate = useNavigate();
+  const demoCompany = isDemoCompany();
 
   const activities = [
     "18:42 Rahul completed ORD-102",
@@ -80,44 +82,61 @@ export default function CompanyDashboard() {
 
   return (
     <CompanyLayout title="Company Dashboard">
+      {!demoCompany && (
+        <div className="bg-white rounded-3xl shadow-lg p-8 mb-8">
+          <h2 className="text-3xl font-bold mb-3">
+            Welcome to LogiFlow 🚀
+          </h2>
 
+          <p className="text-gray-600 mb-5">
+            Your company is ready. Complete these steps to begin operations.
+          </p>
+
+          <div className="space-y-2">
+            <div>✅ Company Profile Created</div>
+            <div>⬜ Add Riders</div>
+            <div>⬜ Create First Delivery</div>
+            <div>⬜ Start Tracking Fleet</div>
+          </div>
+        </div>
+      )}
       {/* KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
 
         <KpiCard
           title="Orders Today"
-          value="312"
+          value={demoCompany ? "312" : "0"}
         />
 
         <KpiCard
           title="In Transit"
-          value="126"
+          value={demoCompany ? "126" : "0"}
         />
 
         <KpiCard
           title="Completed"
-          value="178"
+          value={demoCompany ? "178" : "0"}
         />
 
         <KpiCard
           title="Delayed"
-          value="8"
+          value={demoCompany ? "12" : "0"}
           valueClass="text-red-500"
         />
 
         <KpiCard
           title="Revenue"
-          value="₹2.4L"
+          value={demoCompany ? "₹2.4L" : "0"}
           valueClass="text-green-600"
         />
 
         <KpiCard
           title="CSAT"
-          value="96%"
+          value={demoCompany ? "96%" : "0"}
         />
 
       </div>
-
+      
       {/* Operations */}
       <div className="grid lg:grid-cols-2 gap-8">
 
@@ -133,14 +152,16 @@ export default function CompanyDashboard() {
           </h2>
 
           <p className="text-gray-600 mb-6">
-            Track riders, deliveries and optimize routes in real time.
+            {demoCompany
+              ? "Track riders, deliveries and optimize routes in real time."
+              : "Add riders and create deliveries to start tracking your fleet."}
           </p>
 
           <button
             onClick={() => navigate("/company/map")}
             className="bg-[#FF5A1F] text-white px-6 py-3 rounded-xl hover:opacity-90 transition"
           >
-            Open Fleet Center
+            {demoCompany ? "Open Fleet Center" : "Add Riders"}
           </button>
 
         </div>
@@ -157,208 +178,214 @@ export default function CompanyDashboard() {
           </h2>
 
           <p className="text-gray-600 mb-6">
-            Monitor ratings, reviews and productivity insights.
+            {demoCompany
+              ? "Monitor ratings, reviews and productivity insights."
+              : "Add riders and create deliveries to start tracking performance."}
           </p>
 
           <button
             onClick={() => navigate("/company/feedback")}
             className="border-2 border-[#FF5A1F] text-[#FF5A1F] px-6 py-3 rounded-xl hover:bg-[#FF5A1F] hover:text-white transition"
           >
-            View Performance
+            {demoCompany ? "View Performance" : "Coming soon"}
           </button>
 
         </div>
-
+      
       </div>
 
-      {/* Live Activity Feed */}
-      <div className="bg-white rounded-3xl shadow-lg p-8 mt-10">
+      {demoCompany && (
+        <>
+          {/* Live Activity Feed */}
+          <div className="bg-white rounded-3xl shadow-lg p-8 mt-10">
 
-        <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-6">
 
-          <h2 className="text-2xl font-bold">
-            Live Activity Feed
-          </h2>
+              <h2 className="text-2xl font-bold">
+                Live Activity Feed
+              </h2>
 
-          <span className="text-green-600 font-semibold">
-            ● Updating
-          </span>
-
-        </div>
-
-        <div className="space-y-4">
-
-          {activities.map((item, index) => (
-            <div
-              key={index}
-              className="
-                flex items-center
-                gap-4
-                border-l-4
-                border-[#FF5A1F]
-                bg-orange-50
-                rounded-r-2xl
-                px-5
-                py-4
-              "
-            >
-
-              <div className="w-3 h-3 rounded-full bg-[#FF5A1F]" />
-
-              <p className="text-gray-700 font-medium">
-                {item}
-              </p>
+              <span className="text-green-600 font-semibold">
+                ● Updating
+              </span>
 
             </div>
-          ))}
 
-        </div>
+            <div className="space-y-4">
 
-      </div>
+              {activities.map((item, index) => (
+                <div
+                  key={index}
+                  className="
+                    flex items-center
+                    gap-4
+                    border-l-4
+                    border-[#FF5A1F]
+                    bg-orange-50
+                    rounded-r-2xl
+                    px-5
+                    py-4
+                  "
+                >
 
-      {/* Analytics */}
-      <div className="grid lg:grid-cols-2 gap-8 mt-10">
+                  <div className="w-3 h-3 rounded-full bg-[#FF5A1F]" />
 
-        {/* Revenue */}
-        <div className="bg-white rounded-3xl shadow-lg p-8">
-
-          <h2 className="text-2xl font-bold mb-6">
-            Revenue Trend
-          </h2>
-
-          <ResponsiveContainer width="100%" height={300}>
-
-            <LineChart data={revenueData}>
-
-              <XAxis dataKey="day" />
-
-              <YAxis />
-
-              <Tooltip />
-
-              <Line
-                type="monotone"
-                dataKey="revenue"
-                stroke="#FF5A1F"
-                strokeWidth={4}
-              />
-
-            </LineChart>
-
-          </ResponsiveContainer>
-
-        </div>
-
-        {/* Deliveries */}
-        <div className="bg-white rounded-3xl shadow-lg p-8">
-
-          <h2 className="text-2xl font-bold mb-6">
-            Deliveries Trend
-          </h2>
-
-          <ResponsiveContainer width="100%" height={300}>
-
-            <BarChart data={deliveryData}>
-
-              <XAxis dataKey="day" />
-
-              <YAxis />
-
-              <Tooltip />
-
-              <Bar
-                dataKey="deliveries"
-                fill="#FF5A1F"
-                radius={[8, 8, 0, 0]}
-              />
-
-            </BarChart>
-
-          </ResponsiveContainer>
-
-        </div>
-
-      </div>
-
-      {/* Insights */}
-      <div className="grid lg:grid-cols-2 gap-8 mt-10">
-
-        {/* Delay Breakdown */}
-        <div className="bg-white rounded-3xl shadow-lg p-8">
-
-          <h2 className="text-2xl font-bold mb-6">
-            Delay Breakdown
-          </h2>
-
-          <ResponsiveContainer width="100%" height={300}>
-
-            <PieChart>
-
-              <Pie
-                data={delayData}
-                dataKey="value"
-                outerRadius={100}
-                label
-              >
-
-                {delayData.map((entry, index) => (
-                  <Cell
-                    key={index}
-                    fill={COLORS[index]}
-                  />
-                ))}
-
-              </Pie>
-
-              <Tooltip />
-
-            </PieChart>
-
-          </ResponsiveContainer>
-
-        </div>
-
-        {/* Leaderboard */}
-        <div className="bg-white rounded-3xl shadow-lg p-8">
-
-          <h2 className="text-2xl font-bold mb-6">
-            Top Riders Leaderboard
-          </h2>
-
-          <div className="space-y-4">
-
-            {topRiders.map((rider, index) => (
-
-              <div
-                key={index}
-                className="flex justify-between items-center border-b pb-4"
-              >
-
-                <div>
-
-                  <p className="font-semibold">
-                    {rider.name}
-                  </p>
-
-                  <p className="text-gray-500 text-sm">
-                    {rider.deliveries} Deliveries
+                  <p className="text-gray-700 font-medium">
+                    {item}
                   </p>
 
                 </div>
+              ))}
 
-                <span className="font-bold text-[#FF5A1F]">
-                  ⭐ {rider.rating}
-                </span>
-
-              </div>
-
-            ))}
+            </div>
 
           </div>
 
-        </div>
+          {/* Analytics */}
+          <div className="grid lg:grid-cols-2 gap-8 mt-10">
 
-      </div>
+            {/* Revenue */}
+            <div className="bg-white rounded-3xl shadow-lg p-8">
+
+              <h2 className="text-2xl font-bold mb-6">
+                Revenue Trend
+              </h2>
+
+              <ResponsiveContainer width="100%" height={300}>
+
+                <LineChart data={revenueData}>
+
+                  <XAxis dataKey="day" />
+
+                  <YAxis />
+
+                  <Tooltip />
+
+                  <Line
+                    type="monotone"
+                    dataKey="revenue"
+                    stroke="#FF5A1F"
+                    strokeWidth={4}
+                  />
+
+                </LineChart>
+
+              </ResponsiveContainer>
+
+            </div>
+
+            {/* Deliveries */}
+            <div className="bg-white rounded-3xl shadow-lg p-8">
+
+              <h2 className="text-2xl font-bold mb-6">
+                Deliveries Trend
+              </h2>
+
+              <ResponsiveContainer width="100%" height={300}>
+
+                <BarChart data={deliveryData}>
+
+                  <XAxis dataKey="day" />
+
+                  <YAxis />
+
+                  <Tooltip />
+
+                  <Bar
+                    dataKey="deliveries"
+                    fill="#FF5A1F"
+                    radius={[8, 8, 0, 0]}
+                  />
+
+                </BarChart>
+
+              </ResponsiveContainer>
+
+            </div>
+
+          </div>
+
+          {/* Insights */}
+          <div className="grid lg:grid-cols-2 gap-8 mt-10">
+
+            {/* Delay Breakdown */}
+            <div className="bg-white rounded-3xl shadow-lg p-8">
+
+              <h2 className="text-2xl font-bold mb-6">
+                Delay Breakdown
+              </h2>
+
+              <ResponsiveContainer width="100%" height={300}>
+
+                <PieChart>
+
+                  <Pie
+                    data={delayData}
+                    dataKey="value"
+                    outerRadius={100}
+                    label
+                  >
+
+                    {delayData.map((entry, index) => (
+                      <Cell
+                        key={index}
+                        fill={COLORS[index]}
+                      />
+                    ))}
+
+                  </Pie>
+
+                  <Tooltip />
+
+                </PieChart>
+
+              </ResponsiveContainer>
+
+            </div>
+
+            {/* Leaderboard */}
+            <div className="bg-white rounded-3xl shadow-lg p-8">
+
+              <h2 className="text-2xl font-bold mb-6">
+                Top Riders Leaderboard
+              </h2>
+
+              <div className="space-y-4">
+
+                {topRiders.map((rider, index) => (
+
+                  <div
+                    key={index}
+                    className="flex justify-between items-center border-b pb-4"
+                  >
+
+                    <div>
+
+                      <p className="font-semibold">
+                        {rider.name}
+                      </p>
+
+                      <p className="text-gray-500 text-sm">
+                        {rider.deliveries} Deliveries
+                      </p>
+
+                    </div>
+
+                    <span className="font-bold text-[#FF5A1F]">
+                      ⭐ {rider.rating}
+                    </span>
+
+                  </div>
+
+                ))}
+
+              </div>
+
+            </div>
+
+          </div>
+        </>
+      )}
 
     </CompanyLayout>
   );

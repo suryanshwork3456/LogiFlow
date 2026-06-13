@@ -10,15 +10,21 @@ export default function CompanyLayout({ title, children }) {
   const company = JSON.parse(
   localStorage.getItem("company")
   );
-  const menuItems = [
-    { name: "Dashboard", path: "/company/dashboard", icon: "🏢" },
-    { name: "Operations", path: "/company/operations", icon: "🎯" },
-    { name: "Fleet", path: "/company/map", icon: "🚚" },
-    { name: "Performance", path: "/company/feedback", icon: "⭐" },
-    { name: "Deliveries", path: "/company/deliveries", icon: "📦" },
-    { name: "Analytics", path: "/company/analytics", icon: "📈" },
-    { name: "Alerts", path: "/company/alerts", icon: "🚨" },
-  ];
+  const demoCompany =
+  company?.company_name === "ABC Logistics";
+  const menuItems = demoCompany
+    ? [
+        { name: "Dashboard", path: "/company/dashboard", icon: "🏢" },
+        { name: "Operations", path: "/company/operations", icon: "🎯" },
+        { name: "Fleet", path: "/company/map", icon: "🚚" },
+        { name: "Performance", path: "/company/feedback", icon: "⭐" },
+        { name: "Deliveries", path: "/company/deliveries", icon: "📦" },
+        { name: "Analytics", path: "/company/analytics", icon: "📈" },
+        { name: "Alerts", path: "/company/alerts", icon: "🚨" },
+      ]
+    : [
+        { name: "Dashboard", path: "/company/dashboard", icon: "🏢" },
+      ];
 
   return (
     <div className="flex min-h-screen bg-[#F6F7FB]">
@@ -75,8 +81,16 @@ export default function CompanyLayout({ title, children }) {
                   Current Company
                 </p>
                 <h3 className="font-semibold mt-2">{company?.company_name || "ABC Logistics"}</h3>
-                <p className="text-sm text-green-400 mt-1">
-                  ● System Operational
+                <p
+                  className={`text-sm mt-1 ${
+                    demoCompany
+                      ? "text-green-400"
+                      : "text-yellow-400"
+                  }`}
+                >
+                  {demoCompany
+                    ? "● System Operational"
+                    : "● Setup In Progress"}
                 </p>
               </div>
 

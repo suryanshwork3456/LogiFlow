@@ -246,6 +246,15 @@ export default function LoginForm() {
           "company",
           JSON.stringify(data)
         );
+        localStorage.setItem(
+          "company_name",
+          data.company_name
+        );
+
+        localStorage.setItem(
+          "company_id",
+          data.company_id
+        );
 
         if (data.is_setup_complete) {
           navigate("/company/dashboard");
